@@ -1,0 +1,26 @@
+.root {
+  h2 {
+    font-size: 20px;
+    color: #fff;
+    margin: 20px 0;
+    font-weight: 500;
+  }
+  .swiper {
+    width: 100%;
+    .card {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      img {
+        width: 100%;
+        border-radius: 4px;
+      }
+      p {
+        color: #fff;
+        text-align: center;
+        font-size: 14px;
+        margin: 10px 0;
+      }
+    }
+  }
+}

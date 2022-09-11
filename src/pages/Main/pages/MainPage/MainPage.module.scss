@@ -1,0 +1,20 @@
+.root {
+  width: 1300px;
+  margin: 0 auto;
+  img {
+    width: 100%;
+  }
+  h2 {
+    color: #fff;
+    font-weight: 500;
+  }
+  p {
+    color: gray;
+  }
+}
+
+@media (max-width: 1320px) {
+  .root {
+    width: 96%;
+  }
+}

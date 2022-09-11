@@ -1,0 +1,44 @@
+.root {
+  display: none !important;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  padding: 10px 0;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: #131313;
+  z-index: 20;
+  div,a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    cursor: pointer;
+    color: gray;
+    svg {
+      width: 20px;
+      height: 20px;
+      margin: 0 auto;
+    }
+    span {
+      text-align: center;
+      font-size: 14px;
+      margin: 5px 0;
+    }
+  }
+}
+
+@media (max-width: 510px) {
+  .root {
+    display: grid !important;
+    div,a {
+      svg {
+        width: 15px;
+        height: 15px;
+      }
+      span {
+        font-size: 12px;
+      }
+    }
+  }
+}

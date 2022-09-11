@@ -1,0 +1,21 @@
+.root {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('../../../../../../../public/img/2560x1440.png') center / cover;
+  .container {
+    width: 600px;
+    padding: 30px;
+    border-radius: 6px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    h2 {
+      font-size: 25px;
+      font-weight: 400;
+      text-align: center;
+    }
+  }
+}

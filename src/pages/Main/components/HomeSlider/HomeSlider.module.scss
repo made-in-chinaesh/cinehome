@@ -1,0 +1,408 @@
+.root {
+  width: 100%;
+  height: 80vh;
+
+  .swiperContainer {
+    margin: 15px auto;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin-bottom: 50px;
+
+    .mySwiper {
+      width: 1300px;
+      height: 100%;
+      user-select: none;
+      overflow: initial;
+
+      .activeSlide {
+        width: 100%;
+        border-radius: 15px;
+        display: flex;
+        overflow: hidden;
+        cursor: pointer;
+
+        .activeSlideContent {
+          display: flex;
+          width: 100%;
+          height: 100%;
+          padding: 2rem;
+          box-sizing: border-box;
+          align-items: center;
+          transition: all 1s ease;
+          position: relative;
+          z-index: 10;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba($color: #000000, $alpha: .6);
+          }
+
+
+          .posterContent {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 55%;
+            position: relative;
+            z-index: 11;
+            color: #fff;
+            padding: 2rem;
+
+            h1 {
+              margin: 20px 0;
+              font-size: 60px;
+            }
+
+            b {
+              color: #ea003d;
+              margin: 10px 0;
+              font-size: 24px;
+
+              span {
+                font-size: 18px;
+                color: #fff;
+              }
+            }
+
+            p {
+              font-size: 14px;
+              line-height: 20px;
+              font-weight: bold;
+            }
+
+            .infoBtnContainer {
+              .trailerBtn {
+                font-size: 18px;
+                color: #fff;
+                font-weight: 500;
+                border-radius: 25px;
+                padding: 10px 2rem;
+                border: 2px solid #fff;
+                background-color: transparent;
+                margin: 10px 0;
+                cursor: pointer;
+                transition: all .35s;
+
+                &:hover {
+                  border-color: #ea003d;
+                  background-color: #ea003d;
+                  box-shadow: 0px 0px 15px 5px #ea003e9f;
+
+                }
+              }
+            }
+
+          }
+
+
+          .posterContaier {
+            width: 45%;
+            height: 100%;
+            display: flex;
+            z-index: 11;
+            align-items: center;
+            justify-content: center;
+
+            img {
+              object-fit: cover;
+              max-width: 60%;
+              min-width: 300px;
+              height: 70%;
+              margin-top: 10%;
+              border-radius: 24px;
+            }
+          }
+        }
+
+        .content {
+          display: flex;
+          width: 100%;
+          height: 100%;
+          padding: 2rem;
+          transform: scale(0.8);
+          box-sizing: border-box;
+          align-items: center;
+          transition: .25s linear;
+          position: absolute;
+          border-radius: 15px;
+          z-index: -10;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba($color: #000000, $alpha: .8);
+            z-index: -9;
+          }
+
+
+          .posterContent {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 60%;
+            position: relative;
+            color: #fff;
+            padding: 2rem;
+
+            h1,
+            b,
+            p,
+            .infoBtnContainer {
+              z-index: -20;
+            }
+
+            h1 {
+              margin: 20px 0;
+              font-size: 60px;
+            }
+
+            b {
+              color: #ea003d;
+              margin: 10px 0;
+              font-size: 24px;
+
+              span {
+                font-size: 18px;
+                color: #fff;
+              }
+            }
+
+            p {
+              font-size: 14px;
+              line-height: 20px;
+              font-weight: bold;
+            }
+
+            .infoBtnContainer {
+              .trailerBtn {
+                font-size: 18px;
+                color: #fff;
+                font-weight: 500;
+                border-radius: 25px;
+                padding: 10px 2rem;
+                border: 2px solid #fff;
+                background-color: transparent;
+                margin: 1.5rem 1rem;
+                cursor: pointer;
+                transition: all .35s;
+
+                &:hover {
+                  border-color: #ea003d;
+                  background-color: #ea003d;
+                  box-shadow: 0px 0px 15px 5px #ea003e9f;
+
+                }
+              }
+            }
+
+          }
+
+
+          .posterContaier {
+            width: 40%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            position: relative;
+
+            img {
+              z-index: -20;
+              object-fit: cover;
+              width: 63%;
+              height: 70%;
+              border-radius: 20px;
+            }
+          }
+        }
+
+
+
+
+      }
+
+      svg {
+        font-size: 25px;
+      }
+
+      .swiperButtonNext,
+      .swiperButtonPrev {
+        background-color: rgba(255, 255, 255, 0.497);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        border-radius: 50%;
+        padding: 1rem;
+        top: 50%;
+        z-index: 15;
+        cursor: pointer;
+        transition: 0.25s;
+
+        &:hover {
+          background-color: #fff;
+        }
+      }
+
+      .swiperButtonPrev {
+        left: -60px;
+        transform: translate(50%, -50%);
+      }
+
+      .swiperButtonNext {
+        right: -60px;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+  }
+
+}
+
+@media (max-width: 1296px) {
+  .root {
+    .swiperContainer {
+      .mySwiper {
+        width: 85%;
+        padding: 0 7.5%;
+
+        .swiperButtonPrev {
+          left: 0;
+        }
+
+        .swiperButtonNext {
+          right: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1015px) {
+  .root {
+    height: 70vh;
+
+    .swiperContainer {
+      .mySwiper {
+        .activeSlide {
+
+          .activeSlideContent {
+            position: relative;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 10px;
+
+            &::before {
+              background: transparent;
+            }
+
+            &::after {
+              content: '';
+              width: 100%;
+              height: 50%;
+              position: absolute;
+              bottom: 0px;
+              left: 0px;
+              background: linear-gradient(0deg, rgb(6, 6, 6) 0%, rgb(0, 0, 0) 35%, rgba(83, 100, 141, 0) 100%);
+            }
+
+            .posterContaier {
+              display: none;
+            }
+
+            .posterContent {
+              width: 100%;
+              position: relative;
+              padding-bottom: 0px;
+              text-align: center;
+
+              h1 {
+                text-align: center;
+                font-size: 30px;
+                margin: 1rem;
+                z-index: 3;
+              }
+
+              p {
+                display: none;
+              }
+
+              .infoBtnContainer {
+                .trailerBtn {
+                  width: 200px;
+                  margin: 10px 8px;
+                }
+              }
+            }
+          }
+
+          .content {
+            &::after {
+              content: '';
+              width: 100%;
+              height: 50%;
+              position: absolute;
+              bottom: 0px;
+              left: 0px;
+              background: linear-gradient(0deg, rgb(6, 6, 6) 0%, rgb(0, 0, 0) 35%, rgba(83, 100, 141, 0) 100%);
+              z-index: -3;
+            }
+
+            img {
+              display: none;
+            }
+
+            .posterContent {
+
+              h1 {
+                margin: 1rem;
+              }
+
+              b {
+                z-index: 3;
+                font-size: 20px;
+                color: #ea003d;
+
+                span {
+                  display: initial;
+                }
+              }
+
+              p {
+                display: none;
+              }
+            }
+          }
+        }
+
+        svg {
+          font-size: 17px;
+        }
+
+        .swiperButtonPrev {
+          left: 0;
+        }
+
+        .swiperButtonNext {
+          right: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .root {
+    height: 60vh;
+
+  }
+}
