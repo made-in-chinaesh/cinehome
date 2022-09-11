@@ -21,15 +21,17 @@ const useSignIn = () => {
     request
       .then(res => {
         const data = res.data
-
-        if (data.email === admin.email) {
+        if (data.localId === admin.localId) {
           alert('Добро пожаловать!')
+          localStorage.setItem('admin', data.localId)
           return navigate('/admin')
         }
 
         const isWorker = workers.find(({ email }) => email === data.email)
+
         if (isWorker) {
           alert(`Приветствую ${isWorker.firstName}`)
+          localStorage.setItem('workerId', isWorker.key)
           return navigate(`/admin/worker/${isWorker.key}`)
         }
 
