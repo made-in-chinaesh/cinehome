@@ -1,3 +1,4 @@
+import { NotFound } from 'components/NotFound'
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { BottomNavbar } from './components/BottomNavbar/BottomNavbar'
@@ -18,6 +19,7 @@ export const MainLayout = () => {
         <Route path="/movies/allmovies" element={<AllMoviesPage />} />
         <Route path="/movies/:movieId" element={<MoviePage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <BottomNavbar />
     </>

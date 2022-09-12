@@ -3,15 +3,16 @@ import cls from './NoAccess.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { RiLock2Fill } from 'react-icons/ri'
 
-export const NoAccess = () => {
+export const NoAccess = ({ isAdmin = false }) => {
   const navigate = useNavigate()
 
+  const goToAuthPage = () => navigate(isAdmin ? '/admin/auth/signin' : '/auth')
   return (
     <div className={cls.root}>
       <div>
         <RiLock2Fill />
         <h2>Вы не авторизованы!</h2>
-        <button onClick={() => navigate('/auth')}>Авторизоваться</button>
+        <button onClick={() => goToAuthPage()}>Авторизоваться</button>
       </div>
     </div>
   )
