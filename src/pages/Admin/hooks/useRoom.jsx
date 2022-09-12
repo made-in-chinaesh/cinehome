@@ -7,10 +7,12 @@ const useRoom = () => {
 
   const getRooms = () => {
     const request = Admin.API.getRooms()
+
     setIsLoading(true)
+
     request
       .then(res => {
-        const data = res.data
+        const data = res.data.filter(item => item)
         setRooms(data)
       })
       .finally(() => setIsLoading(false))
