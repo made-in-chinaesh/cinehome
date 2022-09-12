@@ -2,6 +2,7 @@ import React from 'react'
 import { auth } from 'configs'
 import { Admin } from '..'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 
 const useSignIn = () => {
@@ -22,7 +23,13 @@ const useSignIn = () => {
       .then(res => {
         const data = res.data
         if (data.localId === admin.localId) {
-          alert('Добро пожаловать!')
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Добро пожаловать!',
+            showConfirmButton: false,
+            timer: 1500,
+          })
           localStorage.setItem('admin', data.localId)
           return navigate('/admin')
         }
@@ -30,14 +37,37 @@ const useSignIn = () => {
         const isWorker = workers.find(({ email }) => email === data.email)
 
         if (isWorker) {
-          alert(`Приветствую ${isWorker.firstName}`)
+          Swal.fire({
+            icon: 'success',
+            position: 'center',
+            title: `Приветствую ${isWorker.firstName}`,
+            showConfirmButton: false,
+            timer: 1500,
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown',
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp',
+            },
+          })
+
           localStorage.setItem('workerId', isWorker.key)
-          return navigate(`/admin/worker/${isWorker.key}`)
+          return setTimeout(() => {
+            navigate(`/admin/worker/${isWorker.key}`)
+          }, 1500)
         }
 
-        alert('Вы не являетесь частью админки')
+        Swal.fire({
+          icon: 'error',
+          title: 'Вы не являетесь частью админки!',
+        })
       })
-      .catch(() => alert('Ошибка!'))
+      .catch(() => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ошибка!',
+        })
+      })
       .finally(() => setIsLoading(false))
   }
 

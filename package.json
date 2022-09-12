@@ -15,6 +15,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "sass": "^1.54.8",
+    "sweetalert2": "^11.4.32",
     "swiper": "^8.3.2",
     "tailwindcss": "^3.1.8",
     "vanilla-tilt": "^1.7.2",

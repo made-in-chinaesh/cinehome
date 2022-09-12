@@ -31,7 +31,7 @@ export const WorkerCards = () => {
             ))
           }
         </div>
-        <button>+Добавить работника</button>
+        <button onClick={() => navigate('/admin/auth/registerworker')}>+Добавить работника</button>
       </div>
     </div>
   )

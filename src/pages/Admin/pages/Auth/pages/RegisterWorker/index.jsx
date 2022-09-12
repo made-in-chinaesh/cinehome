@@ -1,6 +1,6 @@
 import React from 'react'
 import cls from './RegisterWorker.module.scss'
-import { Button } from 'components/UI/Button'
+import { Button, ButtonVariants } from 'components/UI/Button'
 import { Input } from 'components/UI/Input'
 import { useForm } from 'react-hook-form'
 import { Forms } from 'helpers/Forms'
@@ -15,11 +15,20 @@ export const RegisterWorker = () => {
   } = Admin.Hook.FileReader.use()
 
   const {
+    isLoading,
+    actions: {
+      registerWorker,
+      postWorker,
+    },
+  } = Admin.Hook.RegisterWorker.use()
+
+  const {
     register,
     formState: {
       errors,
     },
     handleSubmit,
+    reset,
   } = useForm()
 
   const onSubmit = (data) => {
@@ -27,16 +36,38 @@ export const RegisterWorker = () => {
 
     if (image) {
       const newData = {
-        ...data,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phoneNumber: data.phoneNumber,
         photoUrl: image,
       }
-      console.log(newData)
+
+      const registerBody = {
+        email: data.email,
+        password: data.password,
+      }
+
+      return registerWorker(registerBody)
+        .then(res => {
+          if (res) return
+
+          postWorker(res.localId, newData)
+          reset({
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            phoneNumber: '',
+            photoUrl: '',
+          })
+        })
     }
+    return
   }
 
   return (
     <div className={cls.root}>
-      <img src={image && image} alt="" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2>Регистрация</h2>
         <Input
@@ -81,6 +112,8 @@ export const RegisterWorker = () => {
 
         <Button
           onClick={handleSubmit(onSubmit)}
+          disabled={isLoading}
+          variant={isLoading ? ButtonVariants.loading : ButtonVariants.green}
         >Зарегистрировать</Button>
       </form>
     </div>
