@@ -7,6 +7,7 @@ export const NoAccess = ({ isAdmin = false }) => {
   const navigate = useNavigate()
 
   const goToAuthPage = () => navigate(isAdmin ? '/admin/auth/signin' : '/auth')
+
   return (
     <div className={cls.root}>
       <div>
