@@ -1,4 +1,4 @@
-import { emailRegExp } from './regex'
+import { emailRegExp, numberRegExp } from './regex'
 
 const required = 'Обязательное поле!'
 
@@ -22,7 +22,15 @@ export const Password = {
   },
 }
 
-export const simpleField = {
+export const PhoneNumber = {
+  required,
+  pattern: {
+    value: numberRegExp,
+    message: 'Неккоректный номер',
+  },
+}
+
+export const SimpleField = {
   required,
   minLength: {
     value: 3,
