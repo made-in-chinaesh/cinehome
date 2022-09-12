@@ -1,0 +1,77 @@
+.root {
+  width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  .header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    h2 {
+      color: #fff;
+      font-weight: 400;
+      font-size: 25px;
+    }
+    select {
+      width: 200px;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 16px;
+      outline: none;
+      transition: 200ms;
+      background: none;
+      border: 1px solid rgb(18, 18, 18);
+      color: #fff;
+      option {
+        background: #000;
+        border: none;
+      }
+      &:focus {
+        box-shadow: 0 0 0 4px #7cc;
+      }
+    }
+  }
+  .main {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+    div {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      img {
+        width: 100%;
+        border-radius: 4px;
+      }
+      p {
+        color: #fff;
+        margin: 10px 0;
+        font-size: 16px;
+      }
+    }
+  }
+  .footer {
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button {
+      padding: 15px 50px;
+      border-radius: 4px;
+      background: none;
+      border: 1px solid rgb(18, 18, 18);
+      color: #fff;
+      margin: 10px;
+      font-size: 16px;
+      transition: 200ms;
+      &:hover {
+        background: #fff;
+        color: #000;
+      }
+    }
+  }
+}

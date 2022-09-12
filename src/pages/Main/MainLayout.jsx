@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { BottomNavbar } from './components/BottomNavbar/BottomNavbar'
 import { Navbar } from './components/Navbar/Navbar'
+import { AllMoviesPage } from './pages/AllMoviesPage'
 import { FavoritesPage } from './pages/FavoritesPage/FavoritesPage'
 import { HomePage } from './pages/HomePage/HomePage'
 import { MainPage } from './pages/MainPage/MainPage'
@@ -14,6 +15,7 @@ export const MainLayout = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/movies" element={<MainPage />} />
+        <Route path="/movies/allmovies" element={<AllMoviesPage />} />
         <Route path="/movies/:movieId" element={<MoviePage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
       </Routes>

@@ -9,11 +9,8 @@
     img {
       width: 100%;
       border-radius: 6px;
-      box-shadow: inset 0 0 50vh #000,
-      0 0 100vh #000,
-      0 0 200vh #000;
       &:hover {
-        box-shadow: inset 0 0 #fff;
+        box-shadow: 0 0 0 5px #fff;
       }
     }
     p {
@@ -21,5 +18,18 @@
       text-align: center;
       margin: 5px 0;
     }
+  }
+}
+
+.emptyFavorites {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h2 {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 400;
   }
 }

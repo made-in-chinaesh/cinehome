@@ -4,10 +4,10 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { swiperImageUrl } from '../../api'
 import { GrPrevious, GrNext } from 'react-icons/gr'
 import { Scrollbar, Navigation } from 'swiper'
+import { useNavigate } from 'react-router-dom'
 
 import 'swiper/css'
 import 'swiper/css/scrollbar'
-import { useNavigate } from 'react-router-dom'
 
 const breakpoints = {
   1400: {
@@ -149,19 +149,14 @@ export const MoviesSlider = ({
                 src={poster_path ? `${swiperImageUrl}${poster_path}` : 'https://i.stack.imgur.com/erwrC.png'}
                 alt="#"
                 className="w-full rounded"
+                title={title ? title : original_title}
               />
               <p>{title ? title : original_title}</p>
             </SwiperSlide>
           ))
         }
-        <SwiperSlide>
-          <div className={cls.allCard}>
-            <h3>all movies</h3>
-          </div>
-        </SwiperSlide>
-
-        <div ref={navigationPrevRef}><GrPrevious /></div>
-        <div ref={navigationNextRef}><GrNext /></div>
+        <div className={cls.next} ref={navigationPrevRef}><GrPrevious /></div>
+        <div className={cls.prev} ref={navigationNextRef}><GrNext /></div>
       </Swiper>
     </div>
   )

@@ -7,6 +7,7 @@
   }
   .swiper {
     width: 100%;
+    position: relative;
     .card {
       display: flex;
       flex-direction: column;
@@ -20,6 +21,34 @@
         text-align: center;
         font-size: 14px;
         margin: 10px 0;
+      }
+    }
+    .next {
+      position: absolute;
+      top: 35%;
+      left: 10px;
+      z-index: 20;
+      padding: 10px;
+      background: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    .prev {
+      position: absolute;
+      top: 35%;
+      right: 10px;
+      z-index: 20;
+      padding: 10px;
+      background: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      svg {
+        width: 20px;
+        height: 20px;
       }
     }
   }

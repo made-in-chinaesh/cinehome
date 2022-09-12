@@ -1,5 +1,5 @@
-import { parseJSON } from 'helpers'
 import React from 'react'
+import { parseJSON } from 'helpers'
 import { Main } from '..'
 
 const useMovie = () => {

@@ -2,8 +2,11 @@ import React from 'react'
 import cls from './MainPage.module.scss'
 import { Main } from '../..'
 import { MoviesSlider } from '../../components/MoviesSlider/MoviesSlider'
+import { useNavigate } from 'react-router-dom'
 
 export const MainPage = () => {
+  const navigate = useNavigate()
+
   const {
     popularMovies,
     topRatedMovies,
@@ -29,6 +32,7 @@ export const MainPage = () => {
         children="Топ рейтинга"
         isLoading={isLoadingTopRatedMovies}
       />
+      <button onClick={() => navigate('/movies/allmovies')}>Посмотреть все фильмы</button>
     </div>
   )
 }
