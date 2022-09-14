@@ -8,22 +8,29 @@ export const WorkerPage = () => {
   const workerId = localStorage.getItem('workerId')
   const navigate = useNavigate()
 
-  const goToSingleRoom = () => navigate(`/admin/room/${roomId}`)
+  const goToSingleRoom = (roomId) => navigate(`/admin/room/${roomId}`)
+
   const {
     rooms,
   } = Admin.Hook.Room.use()
+  console.log(rooms)
 
   if (!workerId) return (<NoAccess isAdmin={true}/>)
 
   return (
     <div className={cls.root}>
-
       <div className={cls.roomsContainer}>
         {
-          rooms?.map(({ roomImage }, index) => (
-            <div className={cls.roomBlock} key={roomImage}>
+          rooms?.map(({ roomImage, isActive, key }, index) => (
+            <div
+              className={isActive ? cls.activeRoomBlock : cls.roomBlock}
+              key={key}
+              onClick={() => goToSingleRoom(key)}
+            >
               <img src={roomImage} alt="#" />
-              <span>room {index + 1}</span>
+              {
+                isActive ? <span>Занято</span> : <span>room {index + 1}</span>
+              }
             </div>
           ))
         }
