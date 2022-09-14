@@ -53,3 +53,15 @@
     }
   }
 }
+
+@media (max-width: 350px) {
+  .root {
+    .swiper {
+      .card {
+        p {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

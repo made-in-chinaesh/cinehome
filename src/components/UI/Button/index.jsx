@@ -10,6 +10,10 @@ export const ButtonVariants = {
     backgroundColor: 'green',
     color: '#fff',
   },
+  blue: {
+    backgroundColor: 'blue',
+    color: '#fff',
+  },
 }
 
 export const Button = React.forwardRef(({

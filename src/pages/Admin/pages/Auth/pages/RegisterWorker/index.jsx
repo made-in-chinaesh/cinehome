@@ -50,7 +50,7 @@ export const RegisterWorker = () => {
 
       return registerWorker(registerBody)
         .then(res => {
-          if (res) return
+          if (!res) return
 
           postWorker(res.localId, newData)
           reset({

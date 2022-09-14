@@ -3,11 +3,11 @@ import cls from './MoviePage.module.scss'
 import { Loader } from 'components/Loader'
 import { useNavigate, useParams } from 'react-router-dom'
 import { BiSkipPrevious } from 'react-icons/bi'
-import { posterUrl } from 'pages/Main/api'
+import { posterUrl, swiperImageUrl } from 'pages/Main/api'
 import { Main } from 'pages/Main'
 import { MoviesSlider } from 'pages/Main/components/MoviesSlider/MoviesSlider'
-import { Actors } from 'pages/Main/components/Actors/Actors'
 import { MovieTrailer } from 'pages/Main/components/MovieTrailer/MovieTrailer'
+import Swal from 'sweetalert2'
 
 const MovieInfoBar = ({
   title,
@@ -43,37 +43,83 @@ const MovieInfoBar = ({
   )
 }
 
-export const MoviePage = () => {
-  const {
-    favorites,
-    actions: {
-      addFavorite,
-      removeFavorite,
-    },
-  } = Main.Hook.Movie.use()
+const Actors = ({
+  actors,
+  vote_average,
+}) => {
+  if (!actors) return
 
+  const fourActors = actors.filter((item, index) => index < 4)
+
+  return (
+    <div className={cls.fourActorsContianer}>
+      <div className={cls.averageCard}>
+        <div>
+          <h3>{vote_average}</h3>
+        </div>
+      </div>
+      {
+        fourActors?.map(({ id, name, profile_path }) => (
+          <div
+            key={id}
+            className={cls.card}
+          >
+            <div>
+              <img
+                src={`${swiperImageUrl}${profile_path}`}
+                alt="#"
+              />
+            </div>
+            <p>{name}</p>
+          </div>
+        ))
+      }
+    </div>
+  )
+}
+
+export const MoviePage = () => {
+  const navigate = useNavigate()
   const userId = localStorage.getItem('userId')
   const { movieId } = useParams()
-  const navigate = useNavigate()
 
-  const [isMovieTrailerActive, setIsMovieTrailerActive] = React.useState(false)
-  const [isFavorite, setIsFavorite] = React.useState(false)
-  const goBack = () => navigate(-1)
+  const {
+    actors,
+    actions: {
+      getActors,
+    },
+  } = Main.Hook.Actors.use()
 
   const {
     movie,
     recommendedMovies,
     similarMovies,
+    favorites,
     isLoading,
     actions: {
       getMovie,
       getSimilar,
       getRecommend,
+      addFavorite,
+      removeFavorite,
     },
   } = Main.Hook.Movie.use()
 
+  const [isMovieTrailerActive, setIsMovieTrailerActive] = React.useState(false)
+  const [isFavorite, setIsFavorite] = React.useState(false)
+
+  const goBack = () => navigate(-1)
+
+
   const handleFavorite = () => {
-    if (!userId) return alert('авторизуйтесь')
+    if (!userId) {
+      return Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'Авторизуйтесь чтобы добавлять в избранные',
+        timer: 1500,
+      })
+    }
 
     if (isFavorite) {
       setIsFavorite(false)
@@ -83,6 +129,13 @@ export const MoviePage = () => {
     addFavorite(userId, movieId, movie)
     setIsFavorite(true)
   }
+
+  React.useEffect(() => {
+    if (!movieId) return
+
+    getActors(movieId)
+  }, [])
+
 
   React.useEffect(() => {
     getMovie(movieId)
@@ -98,10 +151,8 @@ export const MoviePage = () => {
 
   React.useEffect(() => {
     const isFavoriteMovie = !!favorites?.find(({ id }) => id === Number(movieId))
-    console.log(isFavoriteMovie)
     setIsFavorite(isFavoriteMovie)
   }, [movieId])
-
 
   if (!movie || isLoading) return <Loader />
 
@@ -115,6 +166,7 @@ export const MoviePage = () => {
     runtime,
     release_date,
     trailer_key,
+    vote_average,
   } = movie
 
   return (
@@ -167,7 +219,7 @@ export const MoviePage = () => {
                 genres={genres}
                 className={cls.movieInfoBarHidden}
               />
-              <Actors movieId={movieId} isFourActors={true} />
+              <Actors actors={actors} vote_average={vote_average} />
               <p>{overview}</p>
               <div className={cls.buttonsContainer}>
                 <button onClick={() => handleFavorite()}>{isFavorite ? '-' : '+'}</button>

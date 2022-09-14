@@ -50,21 +50,22 @@ export const AllMoviesPage = () => {
           <option value="top_rated">Топ</option>
         </select>
       </div>
-      <div className={cls.main}>
-        {
-          isLoading || !movies ?
-            <Loader /> :
-            movies.map(({ id, title, original_title, poster_path }) => (
-              <MoviesCard
-                key={id}
-                title={title}
-                original_title={original_title}
-                poster_path={poster_path}
-                id={id}
-              />
-            ))
-        }
-      </div>
+      {
+        isLoading || !movies ? <Loader /> :
+          <div className={cls.main}>
+            {
+              movies.map(({ id, title, original_title, poster_path }) => (
+                <MoviesCard
+                  key={id}
+                  title={title}
+                  original_title={original_title}
+                  poster_path={poster_path}
+                  id={id}
+                />
+              ))
+            }
+          </div>
+      }
       <div className={cls.footer}>
         <button onClick={() => prevPage()}>Prev</button>
         <button onClick={() => nextPage()}>Next</button>

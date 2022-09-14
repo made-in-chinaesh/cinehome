@@ -3,8 +3,8 @@ import cls from './Navbar.module.scss'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { SearchMovies } from '../SearchMovies/SearchMovies'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { FiUser } from 'react-icons/fi'
 import { CurrentUser } from 'modules/user'
+import { RiLogoutBoxRFill, RiLogoutBoxRLine } from 'react-icons/ri'
 
 const nav = [
   {
@@ -25,15 +25,18 @@ const nav = [
 ]
 
 export const Navbar = () => {
+  const userId = localStorage.getItem('userId')
+
   const {
-    user,
+    actions: {
+      logout,
+    },
   } = CurrentUser.use()
 
   const navigate = useNavigate()
 
 
   const [searchActive, setSearchActive] = React.useState(false)
-
 
   return (
     <>
@@ -56,10 +59,13 @@ export const Navbar = () => {
             }
           </div>
           <div>
-            <p onClick={() => setSearchActive(true)}><AiOutlineSearch /><span>search</span></p>
-            <div onClick={() => !user && navigate('/auth')}>
+            <p
+              onClick={() => setSearchActive(true)}
+              className={cls.search}
+            ><AiOutlineSearch /><span>search</span></p>
+            <div onClick={() => !userId ? navigate('/auth/signin') : logout()}>
               {
-                user?.photoUrl ? <img src={user?.photoUrl} alt="#" /> : <FiUser />
+                !userId ? <p>войти <RiLogoutBoxRFill /></p> : <p>выйти <RiLogoutBoxRLine /></p>
               }
             </div>
           </div>

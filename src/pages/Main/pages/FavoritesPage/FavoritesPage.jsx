@@ -5,6 +5,7 @@ import { swiperImageUrl } from 'pages/Main/api'
 import { Tilt } from 'components/Tilt'
 import { Loader } from 'components/Loader'
 import { NoAccess } from 'components/NoAccess'
+import { useNavigate } from 'react-router-dom'
 
 
 const EmptyFavorites = () => {
@@ -16,6 +17,8 @@ const EmptyFavorites = () => {
 }
 
 export const FavoritesPage = () => {
+  const navigate = useNavigate()
+
   const userId = localStorage.getItem('userId')
 
   const {
@@ -25,9 +28,9 @@ export const FavoritesPage = () => {
 
   if (!userId) return <NoAccess />
 
-  if (!favorites || isLoadingFavorites) return <Loader />
+  if (isLoadingFavorites) return <Loader />
 
-  if (!favorites.length) return <EmptyFavorites />
+  if (!favorites || !favorites.length) return <EmptyFavorites />
 
 
   return (
@@ -35,7 +38,10 @@ export const FavoritesPage = () => {
       {
         favorites.map(({ id, title, original_title, poster_path }) => (
           <Tilt key={id}>
-            <div className={cls.card}>
+            <div
+              className={cls.card}
+              onClick={() => navigate(`/movies/${id}`)}
+            >
               <img src={`${swiperImageUrl}${poster_path}`} alt="#" />
               <p>{title ? title : original_title}</p>
             </div>

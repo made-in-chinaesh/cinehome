@@ -2,7 +2,7 @@ import React from 'react'
 import cls from './SearchMovies.module.scss'
 import { Main } from 'pages/Main'
 import { swiperImageUrl } from 'pages/Main/api'
-
+import { VscChromeClose } from 'react-icons/vsc'
 const SearchMoviesSkeleton = () => {
   const skeletonMovies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
@@ -21,6 +21,8 @@ const SearchMoviesSkeleton = () => {
 
 
 export const SearchMovies = ({ isActive, setIsActive }) => {
+  const body = document.querySelector('body')
+
   const {
     isLoading,
     movies,
@@ -35,6 +37,7 @@ export const SearchMovies = ({ isActive, setIsActive }) => {
 
   const moviePage = (id) => {
     closeSearch()
+    body.style.overflow = 'auto'
     goToMoviePage(id)
   }
 
@@ -44,13 +47,18 @@ export const SearchMovies = ({ isActive, setIsActive }) => {
     if (!value.length) return setIsLoading(false)
   }
 
+  React.useEffect(() => {
+    if (isActive) body.style.overflow = 'hidden'
+  }, [body])
+
   if (!isActive) return
 
 
   return (
     <div className={cls.root}>
+      <VscChromeClose onClick={closeSearch} />
       <div className={cls.container}>
-        <h2 onClick={closeSearch}>Search</h2>
+        <h2>Search</h2>
         <input
           type="search"
           onChange={(e) => handleValue(e.target.value)}

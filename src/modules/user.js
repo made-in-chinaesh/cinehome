@@ -1,11 +1,14 @@
 import { baseRequest } from 'configs'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const getCurrentUser = (userId) => {
   return baseRequest.get(`/users/${userId}.json`)
 }
 
 const useUser = () => {
+  const navigate = useNavigate()
+
   const userId = localStorage.getItem('userId')
 
   const [user, setUser] = React.useState(null)
@@ -25,6 +28,7 @@ const useUser = () => {
 
   const logout = () => {
     localStorage.removeItem('userId')
+    navigate('/auth/signin')
   }
 
   React.useEffect(() => {
@@ -37,7 +41,6 @@ const useUser = () => {
     user,
     actions: {
       logout,
-      get,
     },
   }
 }
