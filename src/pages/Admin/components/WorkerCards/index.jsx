@@ -26,7 +26,7 @@ export const WorkerCards = () => {
               >
                 <img src={photoUrl} alt="#" />
                 <h2>{firstName} {lastName}</h2>
-                <button onClick={() => navigate(`/admin/worker/${key}`)}>Посмотреть отчеты</button>
+                <button onClick={() => navigate(`/admin/worker/reports/${key}`)}>Посмотреть отчеты</button>
               </div>
             ))
           }
