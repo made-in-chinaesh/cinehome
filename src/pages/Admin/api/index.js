@@ -8,6 +8,10 @@ export const getWorkers = () => {
   return baseRequest.get('/workers.json')
 }
 
+export const getWorker = (id) => {
+  return baseRequest.get(`/workers/${id}.json`)
+}
+
 export const postWorker = (id, body) => {
   return baseRequest.put(`/workers/${id}.json`, body)
 }
@@ -34,4 +38,16 @@ export const postReports = (workerId, body) => {
 
 export const getReports = (workerId) => {
   return baseRequest.get(`/workers/${workerId}/reports.json`)
+}
+
+
+export const checkReport = (id, reportKey) => {
+  const body = {
+    isChecked: true,
+  }
+  return baseRequest.patch(`/workers/${id}/reports/${reportKey}.json`, body)
+}
+
+export const deleteReport = (id, reportKey) => {
+  return baseRequest.delete(`/workers/${id}/reports/${reportKey}.json`)
 }

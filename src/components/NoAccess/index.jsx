@@ -6,7 +6,7 @@ import { RiLock2Fill } from 'react-icons/ri'
 export const NoAccess = ({ isAdmin = false }) => {
   const navigate = useNavigate()
 
-  const goToAuthPage = () => navigate(isAdmin ? '/admin/auth/signin' : '/auth')
+  const goToAuthPage = () => navigate(isAdmin ? '/admin/auth/signin' : '/auth/signin')
 
   return (
     <div className={cls.root}>
