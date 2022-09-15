@@ -114,10 +114,10 @@ export const WorkerPage = () => {
               getWorker={getWorker}
             >
               {
-                report.orders.map(({ count, title, price }, index) => (
+                report.orders.map(({ count, title, totalPrice }, index) => (
                   <div key={index}>
                     <h2>{title}</h2>
-                    <h2>Стоимость: {price}</h2>
+                    <h2>Общ-стоимость: {totalPrice}</h2>
                     <h2>Кол-во: {count}</h2>
                   </div>
                 ))
