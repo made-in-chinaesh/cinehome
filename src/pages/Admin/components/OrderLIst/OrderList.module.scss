@@ -1,3 +1,5 @@
+$headerBg: rgb(0, 159, 45); // #93e1d8
+$titleFontSize: 20px;
 .root {
   width: 100%;
   position: relative;
@@ -11,7 +13,9 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     padding: 1.5rem 1rem;
-    background-color: rgb(0, 159, 45);
+    background-color: $headerBg;
+    font-size: $titleFontSize;
+    color: #fff;
   }
   .listBody {
     .singleProduct:nth-child(odd) {
@@ -27,11 +31,19 @@
       grid-template-columns: 2fr 1fr 1fr 1fr;
       background-color: rgb(255, 255, 255);
     }
+    .visitorsContainer {
+      padding: 1.5rem 1rem;
+      background-color: $headerBg;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      font-size: $titleFontSize;
+      color: #fff;
+    }
   }
   .listFooter {
     width: 100%;
     text-align: right;
-    background-color: rgb(0, 159, 45);
+    background-color: $headerBg;
     font-size: 1.5rem;
     color: #fff;
     padding: 1.5rem 1rem;

@@ -3,6 +3,8 @@ import cls from './OrderList.module.scss'
 
 export const OrderList = ({ orderList }) => {
   console.log(orderList)
+
+
   const totalCheck = orderList?.orders?.reduce((prev, current) => {
     return prev + current.totalPrice
   }, 0)
@@ -25,6 +27,14 @@ export const OrderList = ({ orderList }) => {
             </div>
           ))
         }
+        <div className={cls.visitorsContainer}>
+          <div>Количество посетителей</div>
+          <div>Стоимость входа</div>
+        </div>
+        <div className={cls.singleProduct}>
+          <div>{orderList?.clientCount}</div>
+          <div>{orderList?.entryPrice}</div>
+        </div>
 
       </div>
       <div className={cls.listFooter}>

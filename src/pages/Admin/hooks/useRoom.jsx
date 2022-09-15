@@ -209,6 +209,7 @@ const useRoom = (roomId) => {
       isChecked: false,
       clientCount: +data?.clientCount,
       time: data?.time,
+      entryPrice: getPriceByCount(data?.clientCount),
       date: new Date().toLocaleString(),
     }
     const request = Admin.API.postReports(workerId, body)
@@ -261,19 +262,6 @@ const useRoom = (roomId) => {
         if (!data) return
 
         setRoomOrders(data)
-
-        // const oldProducts = data?.map(item => {
-        //   return products?.map(category => {
-        //     return category?.map(product => {
-        //       if (item.key === product.key) {
-        //         return item
-        //       }
-        //       return product
-        //     })
-        //   })
-        // })
-
-        // oldProducts ? setProducts(oldProducts[0]) : null
       })
   }
 
