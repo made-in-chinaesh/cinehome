@@ -50,7 +50,7 @@ export const AddRoomModal = ({
       roomImage: image,
     }
 
-    addRoom(body)
+    return addRoom(body)
   }
 
   const handleImage = (value) => {

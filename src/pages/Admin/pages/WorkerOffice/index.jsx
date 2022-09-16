@@ -88,7 +88,23 @@ export const WorkerOffice = () => {
               })
           }
         </div>
+        <button onClick={() => setAddProductModalActive(true)}>Добавить продукт</button>
       </div>
+      {
+        addRoomModalActive &&
+        <AddRoomModal
+          isActive={addRoomModalActive}
+          setIsActive={setAddRoomModalActive}
+          getRooms={getRooms}
+        />
+      }
+      {
+        addProductModalActive &&
+        <AddProductsModal
+          isActive={addProductModalActive}
+          setIsActive={setAddProductModalActive}
+        />
+      }
     </>
   )
 }
