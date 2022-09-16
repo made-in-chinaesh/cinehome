@@ -1,11 +1,12 @@
 .root {
-  width: 100%;
+  width: 900px;
   display: grid;
   grid-template-columns: 1fr 1fr 4fr 1fr;
   color: #fff;
   padding: 15px;
   border: 1px solid #fff;
-  background-color: #000;
+  background-color: #315659;
+  margin: 10px 0;
 
   div {
     display: flex;

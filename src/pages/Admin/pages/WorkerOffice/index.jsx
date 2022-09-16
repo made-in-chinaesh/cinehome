@@ -5,7 +5,6 @@ import { Admin } from 'pages/Admin'
 import { useNavigate, useParams } from 'react-router-dom'
 
 export const WorkerOffice = () => {
-  const { workerId: index } = useParams()
   const workerId = localStorage.getItem('workerId')
   const navigate = useNavigate()
 
@@ -14,7 +13,6 @@ export const WorkerOffice = () => {
   const {
     rooms,
   } = Admin.Hook.Room.use()
-  console.log(rooms)
 
   if (!workerId) return (<NoAccess isAdmin={true}/>)
 

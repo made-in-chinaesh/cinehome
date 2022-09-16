@@ -1,0 +1,39 @@
+.root {
+  width: 100%;
+  position: relative;
+  margin: 40px 0;
+  border-radius: .5rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 40px 15%;
+  .listHeader {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    padding: 1.5rem 1rem;
+    background-color: rgb(0, 159, 45);
+  }
+  .listBody {
+    .singleProduct:nth-child(odd) {
+      background-color: rgb(212, 212, 212);
+    }
+    .singleProduct:nth-child(even) {
+      background-color: #fff;
+    }
+    .singleProduct {
+      width: 100%;
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      background-color: rgb(255, 255, 255);
+    }
+  }
+  .listFooter {
+    width: 100%;
+    text-align: right;
+    background-color: rgb(0, 159, 45);
+    font-size: 1.5rem;
+    color: #fff;
+    padding: 1.5rem 1rem;
+  }
+}

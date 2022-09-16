@@ -1,13 +1,17 @@
 import { parseJSON } from 'helpers'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Admin } from '..'
 
 const useRoom = (roomId) => {
   const [rooms, setRooms] = React.useState(null)
+  const [singleRoom, setSingleRoom] = React.useState(null)
   const [isLoading, setIsLoading] = React.useState(false)
   const [products, setProducts] = React.useState(null)
+  const [roomOrders, setRoomOrders] = React.useState(null)
   const [category, setCategory] = React.useState(0)
   const workerId = localStorage.getItem('workerId')
+  const navigate = useNavigate()
 
   const navigation = [
     {
@@ -40,14 +44,13 @@ const useRoom = (roomId) => {
       .finally(() => setIsLoading(false))
   }
 
-  const bookRoom = (roomId) => {
+  const bookRoom = () => {
     const body = { isActive: true }
     const request = Admin.API.activateRoom(roomId, body)
 
     request
-      .then(res => {
-        const data = res.data
-        console.log(data)
+      .catch(err => {
+        console.log(err)
       })
   }
 
@@ -118,7 +121,7 @@ const useRoom = (roomId) => {
   }
 
   const resetProducts = () => {
-    setProducts(products.map(category => {
+    setProducts(products?.map(category => {
       return category.map(product => {
         return {
           ...product,
@@ -148,6 +151,43 @@ const useRoom = (roomId) => {
     return check
   }
 
+  const patchLastOrder = (data) => {
+    const orderId = localStorage.getItem(`room${roomId}`)
+
+    if (!orderId) return
+    if (!workerId) return
+
+    let check = getPriceByCount(data?.clientCount)
+
+    const newArr = []
+    products.forEach(category => {
+      return category.map(product => product.count > 0 && newArr.push(product))
+    })
+
+    check += newArr.reduce((prev, current) => {
+      return prev + +current.totalPrice
+    }, 0)
+
+
+    const body = {
+      orders: newArr,
+      check,
+      isChecked: false,
+      clientCount: +data?.clientCount,
+      time: data?.time,
+      editDate: new Date().toLocaleString(),
+    }
+
+    const request = Admin.API.patchOrder(workerId, orderId, body)
+
+    request
+      .then(res => {
+        const data = res.data
+
+        console.log(data)
+      })
+  }
+
   const totalCheck = (data) => {
     if (!workerId) return
 
@@ -166,50 +206,102 @@ const useRoom = (roomId) => {
     const body = {
       orders: newArr,
       check,
+      isChecked: false,
       clientCount: +data?.clientCount,
       time: data?.time,
       date: new Date().toLocaleString(),
     }
-    console.log(body)
-    console.log(roomId)
-    resetProducts()
+    const request = Admin.API.postReports(workerId, body)
 
-    // const request = Admin.API.postReports(workerId, body)
-
-    // request
-    //   .then(res => {
-    //     console.log(res.data)
-    //   })
+    request
+      .then((res) => {
+        const data = res.data
+        console.log(data.name)
+        localStorage.setItem(`room${roomId}`, data.name)
+        navigate(-1)
+      })
 
     bookRoom(roomId)
+  }
+
+  const removeActivityRoom = () => {
+    const body = { isActive: false }
+    const request = Admin.API.activateRoom(roomId, body)
+
+    request
+      .then(() => {
+        resetProducts()
+        setRoomOrders(null)
+        localStorage.removeItem(`room${roomId}`)
+        navigate(-1)
+      })
+  }
+
+  const getRoom = () => {
+    const request = Admin.API.getSingleRoom(roomId)
+
+    request
+      .then(res => {
+        setSingleRoom(res.data)
+      })
+  }
+
+  const getOldOrder = () => {
+    if (!roomId) return
+    const orderId = localStorage.getItem(`room${roomId}`)
+    if (!orderId) return
+
+    const request = Admin.API.getOldOrder(workerId, orderId)
+
+    request
+      .then(res => {
+        const data = res.data
+        console.log(data)
+
+        if (!data) return
+
+        setRoomOrders(data)
+
+        // const oldProducts = data?.map(item => {
+        //   return products?.map(category => {
+        //     return category?.map(product => {
+        //       if (item.key === product.key) {
+        //         return item
+        //       }
+        //       return product
+        //     })
+        //   })
+        // })
+
+        // oldProducts ? setProducts(oldProducts[0]) : null
+      })
   }
 
 
   React.useEffect(() => {
     getRooms()
     getProducts()
-
-    const request = Admin.API.getReports(workerId)
-
-    request
-      .then(res => {
-        const data = res.data
-        console.log(data)
-      })
+    getRoom()
+    getOldOrder()
   }, [])
 
   return {
     rooms,
+    singleRoom,
     isLoading,
     products,
     navigation,
     category,
+    roomOrders,
     actions: {
       increment,
       decrement,
       handleCategory,
       resetProducts,
       totalCheck,
+      bookRoom,
+      removeActivityRoom,
+      patchLastOrder,
     },
   }
 }

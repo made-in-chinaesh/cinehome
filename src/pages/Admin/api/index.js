@@ -20,6 +20,10 @@ export const getRooms = () => {
   return baseRequest.get('/rooms.json')
 }
 
+export const getSingleRoom = (roomId) => {
+  return baseRequest.get(`/rooms/${roomId}.json`)
+}
+
 export const activateRoom = (roomId, body) => {
   return baseRequest.patch(`/rooms/${roomId}.json`, body)
 }
@@ -40,7 +44,6 @@ export const getReports = (workerId) => {
   return baseRequest.get(`/workers/${workerId}/reports.json`)
 }
 
-
 export const checkReport = (id, reportKey) => {
   const body = {
     isChecked: true,
@@ -50,4 +53,3 @@ export const checkReport = (id, reportKey) => {
 
 export const deleteReport = (id, reportKey) => {
   return baseRequest.delete(`/workers/${id}/reports/${reportKey}.json`)
-}

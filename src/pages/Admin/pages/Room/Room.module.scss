@@ -1,23 +1,61 @@
 .root {
   width: 100%;
   height: 100vh;
+  padding: 40px 4%;
+  object-fit: cover;
+  background-color: #315659;
   form {
-    .categoryes {
-      width: 100%;
+    display: flex;
+    justify-content: center;
+    label {
+      padding: 1px;
       color: #fff;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      margin: 20px 0;
-      .category {
-        padding: 1rem 0;
-        text-align: center;
-        transition: all .3s ease-in;
+      margin: 10px 20px;
+      span {
+        margin: 10px 0;
+        font-size: 20px;
       }
-      .activeCategory {
-        border-bottom: 3px solid #fff;
-        text-align: center;
-        padding: 1rem 0;
+      input {
+        border-radius: 20px;
+        border: none;
+        background-color: #93E1D8;
+        margin: 10px 0;
+        font-size: 20px;
+        padding: .5rem;
+      }
+      #count {
+        width: 70px;
       }
     }
+
+  }
+
+  .categoryes {
+    width: 100%;
+    color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 20px 0;
+
+    .category {
+      padding: 1rem 0;
+      text-align: center;
+      transition: all .3s ease-in;
+      cursor: pointer;
+    }
+
+    .activeCategory {
+      border-bottom: 3px solid #fff;
+      text-align: center;
+      padding: 1rem 0;
+    }
+  }
+
+  .productsContainer {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    padding: 1rem 15%;
+
   }
 }
