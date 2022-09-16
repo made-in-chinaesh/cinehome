@@ -69,6 +69,7 @@ const useRoom = (roomId) => {
         const hookah = parseJSON(data.hookah)
         const snacks = parseJSON(data.snacks)
         setProducts([beverages, snacks, hookah])
+        setFilteredProduct([beverages, snacks, hookah])
       })
   }
 
@@ -271,15 +272,19 @@ const useRoom = (roomId) => {
 
   const onChangeInput = (e) => {
     const value = e.target.value.toUpperCase()
-    if (value.length === 0) return
+
+    if (value.length === 0) return setProducts(filteredProduct)
+
     const findProduct = products?.map(category => {
       return category.filter(product => product.title.toUpperCase().includes(value))
     })
-    if (!findProduct) return setFilteredProduct(null)
 
-    return setFilteredProduct(findProduct)
+    if (!products) return
+
+    if (!products[0].length) return setProducts(null)
+
+    return setProducts(findProduct)
   }
-
 
   React.useEffect(() => {
     getRooms()
@@ -295,7 +300,6 @@ const useRoom = (roomId) => {
     products,
     navigation,
     category,
-    filteredProduct,
     roomOrders,
     actions: {
       increment,
@@ -308,6 +312,7 @@ const useRoom = (roomId) => {
       patchLastOrder,
       getRooms,
       onChangeInput,
+      getProducts,
     },
   }
 }

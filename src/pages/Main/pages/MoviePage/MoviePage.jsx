@@ -2,7 +2,7 @@ import React from 'react'
 import cls from './MoviePage.module.scss'
 import { Loader } from 'components/Loader'
 import { useNavigate, useParams } from 'react-router-dom'
-import { BiSkipPrevious } from 'react-icons/bi'
+import { BiMovie, BiSkipPrevious } from 'react-icons/bi'
 import { posterUrl, swiperImageUrl } from 'pages/Main/api'
 import { Main } from 'pages/Main'
 import { MoviesSlider } from 'pages/Main/components/MoviesSlider/MoviesSlider'
@@ -134,7 +134,7 @@ export const MoviePage = () => {
     if (!movieId) return
 
     getActors(movieId)
-  }, [])
+  }, [movieId])
 
 
   React.useEffect(() => {
@@ -191,7 +191,9 @@ export const MoviePage = () => {
         <div className={cls.previous}>
           <BiSkipPrevious
             onClick={goBack}
-            className="w-[50px] h-[50px] text-white cursor-pointer"
+          />
+          <BiMovie
+            onClick={() => navigate('/movies')}
           />
         </div>
         <div className={cls.container}>

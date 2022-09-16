@@ -9,18 +9,6 @@
   top: 0;
   left: 0;
   z-index: 10;
-  label {
-    display: flex;
-    flex-direction: column;
-    span {
-      margin: 5px 0;
-    }
-    select {
-      font-size: 16px;
-      padding: 10px;
-      border-radius: 4px;
-    }
-  }
   svg {
     width: 30px;
     height: 30px;
@@ -43,6 +31,7 @@
     h2 {
       font-size: 20px;
       font-weight: 400;
+      color: #000;
     }
   }
 }

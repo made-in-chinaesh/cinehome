@@ -12,12 +12,6 @@ export const WorkerOffice = () => {
   const workerId = localStorage.getItem('workerId')
   const navigate = useNavigate()
 
-  const {
-    actions: {
-      getRoom,
-    },
-  } = Admin.Hook.Room.use()
-
   const [addRoomModalActive, setAddRoomModalActive] = React.useState(false)
   const [addProductModalActive, setAddProductModalActive] = React.useState(false)
 
@@ -27,10 +21,10 @@ export const WorkerOffice = () => {
     rooms,
     isLoading,
     products,
-    filteredProduct,
     actions: {
       getRooms,
       onChangeInput,
+      getProducts,
     },
   } = Admin.Hook.Room.use()
 
@@ -42,53 +36,44 @@ export const WorkerOffice = () => {
   return (
     <>
       <div className={cls.root}>
-        <div className={cls.roomsContainer}>
-          {
-            rooms?.map(({ roomImage, isActive, key }, index) => (
-              <div
-                className={isActive ? cls.activeRoomBlock : cls.roomBlock}
-                key={key}
-                onClick={() => goToSingleRoom(key)}
-              >
-                <img src={roomImage} alt="#" />
-                {
-                  isActive ? <span>Занято</span> : <span>room {index + 1}</span>
-                }
-              </div>
-            ))
-          }
-        </div>
-        <button onClick={() => setAddRoomModalActive(true)}>Добавить новую комнату</button>
-        <button>Добавить продукт</button>
-
-
-        <input type="text" placeholder="Поиск" onChange={onChangeInput}/>
-        <div className={cls.productsContainer}>
-          {
-            filteredProduct ?
-              filteredProduct?.map((category) => {
+        <div className={cls.container}>
+          <div className={cls.roomsContainer}>
+            {
+              rooms?.map(({ roomImage, isActive, key }, index) => (
+                <div
+                  className={isActive ? cls.activeRoomBlock : cls.roomBlock}
+                  key={key}
+                  onClick={() => goToSingleRoom(key)}
+                >
+                  <img src={roomImage} alt="#" />
+                  {
+                    isActive ? <span>Занято</span> : <span>room {index + 1}</span>
+                  }
+                </div>
+              ))
+            }
+          </div>
+          <div className={cls.options}>
+            <input type="text" placeholder="Поиск" onChange={onChangeInput} />
+            <button onClick={() => setAddRoomModalActive(true)}>Добавить новую комнату</button>
+            <button onClick={() => setAddProductModalActive(true)}>Добавить продукт</button>
+          </div>
+          <div className={cls.productsContainer}>
+            {
+              products ? products?.map((category) => {
                 return category?.map(product => (
                   (
                     <CardForWorker
                       key={product.key}
                       product={product}
+                      getProducts={getProducts}
                     />
                   )
                 ))
-              }) :
-              products?.map((category) => {
-                return category.map(product => (
-                  (
-                    <CardForWorker
-                      key={product.key}
-                      product={product}
-                    />
-                  )
-                ))
-              })
-          }
+              }) : <h1>Пусто</h1>
+            }
+          </div>
         </div>
-        <button onClick={() => setAddProductModalActive(true)}>Добавить продукт</button>
       </div>
       {
         addRoomModalActive &&
@@ -103,6 +88,7 @@ export const WorkerOffice = () => {
         <AddProductsModal
           isActive={addProductModalActive}
           setIsActive={setAddProductModalActive}
+          getProducts={getProducts}
         />
       }
     </>

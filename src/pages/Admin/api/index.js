@@ -36,6 +36,15 @@ export const getProducts = () => {
   return baseRequest.get('/products.json')
 }
 
+export const deleteProduct = (type, productId) => {
+  return baseRequest.delete(`/products/${type}/${productId}.json`)
+}
+
+export const editProduct = (type, productId, body) => {
+  return baseRequest.patch(`/products/${type}/${productId}.json`, body)
+}
+
+
 export const postReports = (workerId, body) => {
   return baseRequest.post(`/workers/${workerId}/reports.json`, body)
 }

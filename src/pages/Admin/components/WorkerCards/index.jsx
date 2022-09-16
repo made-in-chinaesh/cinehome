@@ -16,6 +16,7 @@ export const WorkerCards = () => {
 
   return (
     <div className={cls.root}>
+      <h2>Работники</h2>
       <div className={cls.container}>
         <div className={cls.workers}>
           {

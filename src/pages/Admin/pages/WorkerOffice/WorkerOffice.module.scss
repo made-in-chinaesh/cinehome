@@ -2,118 +2,149 @@
   width: 100%;
   padding: 40px 0;
   background-color: #315659;
-  // background: rgb(49, 130, 206);
-  // background: linear-gradient(97deg, rgba(49, 130, 206, 1) 43%, rgba(120, 144, 227, 1) 100%);
-
-  .roomsContainer {
-    width: 100%;
-    padding: 0px 4%;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    .roomBlock {
-      width: 400px;
-      height: 400px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      position: relative;
-      transition: all .4s ease;
-      border: 3px solid #253031;
-      &:hover {
-        transform: scale(1.02);
-        z-index: 5;
-      }
-      &::before {
-        content: '';
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background-color: rgba($color: #000000, $alpha: .6);
+  .container {
+    width: 1300px;
+    margin: 0 auto;
+    .roomsContainer {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 300px;
+      grid-gap: 20px;
+      .roomBlock {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
         transition: all .4s ease;
-        opacity: 0;
-        z-index: 2;
+        border: 3px solid #253031;
+        &:hover {
+          transform: scale(1.02);
+          z-index: 5;
+        }
+        &::before {
+          content: '';
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          background-color: rgba($color: #000000, $alpha: .6);
+          transition: all .4s ease;
+          opacity: 0;
+          z-index: 2;
+        }
+        &:hover::before, &:hover span {
+          opacity: 1;
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          object-fit: cover;
+        }
+        span {
+          color: #fff;
+          font-size: 25px;
+          z-index: 3; 
+          transition: all .6s ease;
+          opacity: 0;
+          text-shadow: 0px 0px rgba(255, 255, 255, 1);
+        }
       }
-      &:hover::before, &:hover span {
-        opacity: 1;
-      }
-      img {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        object-fit: cover;
-      }
-      span {
+      .activeRoomBlock {
+         width: 400px;
+         height: 400px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         cursor: pointer;
+         position: relative;
+         transition: all .4s ease;
+         border: 3px solid #253031;
+      
+         &:hover {
+           transform: scale(1.02);
+           z-index: 5;
+         }
+      
+         &::before {
+           content: '';
+           width: 100%;
+           height: 100%;
+           position: absolute;
+           background-color: #50cb2098;
+           transition: all .4s ease;
+           z-index: 2;
+         }
+      
+         &:hover::before,
+         &:hover span {
+           opacity: 1;
+         }
+      
+         img {
+           width: 100%;
+           height: 100%;
+           position: absolute;
+           top: 0;
+           left: 0;
+           object-fit: cover;
+         }
+      
+         span {
+           color: #fff;
+           font-size: 25px;
+           z-index: 3;
+           transition: all .6s ease;
+           opacity: 0;
+           text-shadow: 0px 0px rgba(255, 255, 255, 1);
+         }
+       }
+    }
+  
+    .productsContainer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      width: 100%;
+      box-sizing: border-box;
+      gap: 20px;
+      
+    }
+    .options {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      button {
+        padding: 15px;
+        font-size: 18px;
+        background: #000;
         color: #fff;
-        font-size: 25px;
-        z-index: 3; 
-        transition: all .6s ease;
-        opacity: 0;
-        text-shadow: 0px 0px rgba(255, 255, 255, 1);
+        border-radius: 4px;
+        border: 1px solid #000;
+        margin: 10px 0;
+        cursor: pointer;
+        transition: 200ms;
+        &:hover {
+          background: #fff;
+          color: #000;
+        }
+      }
+      input {
+        padding: 15px;
+        font-size: 18px;
+        border-radius: 4px;
+      width: 1300px;
+        border: gray;
+        margin: 5px 0;
+        outline: none;
+        transition: 200ms;
+        &:focus {
+          box-shadow: 0 0 0 5px #7cc;
+        }
       }
     }
-    .activeRoomBlock {
-       width: 400px;
-       height: 400px;
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       cursor: pointer;
-       position: relative;
-       transition: all .4s ease;
-       border: 3px solid #253031;
-    
-       &:hover {
-         transform: scale(1.02);
-         z-index: 5;
-       }
-    
-       &::before {
-         content: '';
-         width: 100%;
-         height: 100%;
-         position: absolute;
-         background-color: #50cb2098;
-         transition: all .4s ease;
-         z-index: 2;
-       }
-    
-       &:hover::before,
-       &:hover span {
-         opacity: 1;
-       }
-    
-       img {
-         width: 100%;
-         height: 100%;
-         position: absolute;
-         top: 0;
-         left: 0;
-         object-fit: cover;
-       }
-    
-       span {
-         color: #fff;
-         font-size: 25px;
-         z-index: 3;
-         transition: all .6s ease;
-         opacity: 0;
-         text-shadow: 0px 0px rgba(255, 255, 255, 1);
-       }
-     }
-  }
-
-  .productsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 50px;
-    padding: 3rem 15%;
-    box-sizing: border-box;
   }
 }
 

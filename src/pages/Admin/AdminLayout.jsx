@@ -15,7 +15,7 @@ export const AdminLayout = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Main />} />
+      <Route path="/*" element={<Main />} />
       <Route path="/auth/*" element={<AuthLayout />} />
       <Route path="/worker/:workerId" element={<WorkerOffice />} />
       <Route path="/worker/reports/:id" element={<WorkerPage />} />

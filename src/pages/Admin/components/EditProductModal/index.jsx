@@ -1,25 +1,18 @@
 import React from 'react'
 import cls from './index.module.scss'
+import { Button, ButtonVariants } from 'components/UI/Button'
 import { Input } from 'components/UI/Input'
 import { useForm } from 'react-hook-form'
+import { VscChromeClose } from 'react-icons/vsc'
 import { Forms } from 'helpers/Forms'
 import { Admin } from 'pages/Admin'
-import { Button, ButtonVariants } from 'components/UI/Button'
-import { VscChromeClose } from 'react-icons/vsc'
 
-export const AddProductsModal = ({
+export const EditProductModal = ({
   isActive,
   setIsActive,
+  product,
   getProducts,
 }) => {
-  const {
-    register,
-    formState: {
-      errors,
-    },
-    handleSubmit,
-  } = useForm()
-
   const {
     image,
     actions: {
@@ -27,14 +20,23 @@ export const AddProductsModal = ({
     },
   } = Admin.Hook.FileReader.use()
 
+  const {
+    register,
+    formState: {
+      errors,
+    },
+    handleSubmit,
+    reset,
+  } = useForm()
+
   const [isLoading, setIsLoading] = React.useState(false)
 
   const handleImage = (value) => {
     imageReader(value[0])
   }
 
-  const postProduct = (body) => {
-    const request = Admin.API.postProduct(body)
+  const editProduct = (body) => {
+    const request = Admin.API.editProduct(body.type, body.key, body)
     setIsLoading(true)
     request
       .then(() => {
@@ -46,35 +48,27 @@ export const AddProductsModal = ({
 
   const onSubmit = (data) => {
     const body = {
-      count: 0,
+      ...product,
+      title: data.title,
       price: data.price,
       productImg: image,
-      title: data.title,
-      totalPrice: 0,
-      type: data.type,
     }
 
-
-    return postProduct(body)
+    return editProduct(body)
   }
 
-  if (!isActive) return
+  React.useEffect(() => {
+    if (!isActive) return
+
+    reset(product)
+  }, [])
+
 
   return (
     <div className={cls.root}>
       <VscChromeClose onClick={() => setIsActive(false)} />
       <div className={cls.container}>
-        <h2>Добавить продукт</h2>
-        <label>
-          <span>Тип продукта</span>
-          <select
-            {...register('type', Forms.Options.SimpleField)}
-          >
-            <option value="beverages">Напитки</option>
-            <option value="hookah">Кальян</option>
-            <option value="snacks">Закуски</option>
-          </select>
-        </label>
+        <h2>Изменить продукт</h2>
         <Input
           label="Название"
           placeholder="Введите название продукта"
@@ -91,14 +85,14 @@ export const AddProductsModal = ({
         <Input
           type="file"
           label="Картинка продукта"
-          {...register('productImage', Forms.Options.SimpleField)}
+          {...register('productImg', Forms.Options.SimpleField)}
           onChange={(e) => handleImage(e.target.files)}
         />
         <Button
           disabled={isLoading}
           variant={isLoading ? ButtonVariants.loading : ButtonVariants.blue}
           onClick={handleSubmit(onSubmit)}
-        >Добавить</Button>
+        >Изменить</Button>
       </div>
     </div>
   )
