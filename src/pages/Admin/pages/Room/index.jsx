@@ -17,7 +17,6 @@ const ActiveRoomTemplate = ({
   decrement,
   handleCategory,
   roomOrders,
-  handleSubmit,
   removeActivityRoom,
   patchLastOrder,
 }) => {

@@ -38,7 +38,10 @@ const useRoom = (roomId) => {
 
     request
       .then(res => {
-        const data = res.data.filter(item => item)
+        const data = parseJSON(res.data)
+
+        if (!data) return
+
         setRooms(data)
       })
       .finally(() => setIsLoading(false))
@@ -290,6 +293,7 @@ const useRoom = (roomId) => {
       bookRoom,
       removeActivityRoom,
       patchLastOrder,
+      getRooms,
     },
   }
 }

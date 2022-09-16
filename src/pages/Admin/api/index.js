@@ -61,3 +61,8 @@ export const patchOrder = (workerId, orderId, body) => {
 export const getOldOrder = (workerId, orderId) => {
   return baseRequest.get(`/workers/${workerId}/reports/${orderId}.json`)
 }
+
+
+export const addRoom = (body) => {
+  return baseRequest.post('/rooms.json', body)
+}
