@@ -275,7 +275,6 @@ const useRoom = (roomId) => {
     const findProduct = products?.map(category => {
       return category.filter(product => product.title.toUpperCase().includes(value))
     })
-    console.log(findProduct)
     if (!findProduct) return setFilteredProduct(null)
 
     return setFilteredProduct(findProduct)
