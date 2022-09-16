@@ -1,3 +1,5 @@
+import { NotFound } from 'components/NotFound'
+import { RoomTest } from 'components/RoomTest'
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AuthLayout } from './pages/Auth/AuthLayout'
@@ -14,6 +16,8 @@ export const AdminLayout = () => {
       <Route path="/worker/:workerId" element={<WorkerOffice />} />
       <Route path="/worker/reports/:id" element={<WorkerPage />} />
       <Route path="/room/:roomId" element={<Room />} />
+      <Route path="/roomtest/:id" element={<RoomTest />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

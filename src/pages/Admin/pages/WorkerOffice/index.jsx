@@ -8,7 +8,7 @@ export const WorkerOffice = () => {
   const workerId = localStorage.getItem('workerId')
   const navigate = useNavigate()
 
-  const goToSingleRoom = (roomId) => navigate(`/admin/room/${roomId}`)
+  const goToSingleRoom = (roomId) => navigate(`/admin/roomtest/${roomId}`)
 
   const {
     rooms,
