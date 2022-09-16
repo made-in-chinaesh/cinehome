@@ -5,11 +5,16 @@ import { AuthLayout } from 'pages/Auth/AuthLayout'
 import { initializeApp } from 'firebase/app'
 import { firebaseConfig } from 'configs'
 import { AdminLayout } from 'pages/Admin/AdminLayout'
-import { VanillaTilt } from 'components/Tilt'
+import Aos from 'aos'
+import 'aos/dist/aos.css'
 
 initializeApp(firebaseConfig)
 
 const App = () => {
+  React.useEffect(() => {
+    Aos.init()
+  }, [])
+
   return (
     <Routes>
       <Route path="/*" element={<MainLayout />} />
