@@ -8,6 +8,7 @@ const useRoom = (roomId) => {
   const [singleRoom, setSingleRoom] = React.useState(null)
   const [isLoading, setIsLoading] = React.useState(false)
   const [products, setProducts] = React.useState(null)
+  const [filteredProduct, setFilteredProduct] = React.useState(null)
   const [roomOrders, setRoomOrders] = React.useState(null)
   const [category, setCategory] = React.useState(0)
   const workerId = localStorage.getItem('workerId')
@@ -268,6 +269,18 @@ const useRoom = (roomId) => {
       })
   }
 
+  const onChangeInput = (e) => {
+    const value = e.target.value.toUpperCase()
+    if (value.length === 0) return
+    const findProduct = products?.map(category => {
+      return category.filter(product => product.title.toUpperCase().includes(value))
+    })
+    console.log(findProduct)
+    if (!findProduct) return setFilteredProduct(null)
+
+    return setFilteredProduct(findProduct)
+  }
+
 
   React.useEffect(() => {
     getRooms()
@@ -283,6 +296,7 @@ const useRoom = (roomId) => {
     products,
     navigation,
     category,
+    filteredProduct,
     roomOrders,
     actions: {
       increment,
@@ -294,6 +308,7 @@ const useRoom = (roomId) => {
       removeActivityRoom,
       patchLastOrder,
       getRooms,
+      onChangeInput,
     },
   }
 }

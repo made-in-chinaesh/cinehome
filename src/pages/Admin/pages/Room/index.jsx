@@ -1,8 +1,9 @@
+import { Loader } from 'components/Loader'
 import { Admin } from 'pages/Admin'
 import { OrderList } from 'pages/Admin/components/OrderLIst'
 import { Product } from 'pages/Admin/components/Product'
 import { ProductVariant } from 'pages/Admin/components/ProductVariant'
-import { RoomStartBtn } from 'pages/Admin/components/RoomStartBtn'
+import { RoomStartBtn } from 'pages/Admin/adminUI/RoomStartBtn'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
@@ -23,7 +24,9 @@ const ActiveRoomTemplate = ({
   return (
     <div className={cls.root}>
 
-      <OrderList orderList={roomOrders}/>
+      {
+        roomOrders ? <OrderList orderList={roomOrders}/> : <Loader/>
+      }
 
       <div className={cls.categoryes}>
         {
@@ -147,6 +150,7 @@ const FreeRoomTemplate = ({
 
 export const Room = () => {
   const { roomId } = useParams()
+
   const {
     products,
     navigation,
@@ -206,7 +210,7 @@ export const Room = () => {
       onSubmit={onSubmit}
       handleCategory={handleCategory}
     />
-    // <div className={cls.root}>
+  //   <div className={cls.root}>
 
   //   {
   //     singleRoom?.isActive && <OrderList orderList={roomOrders}/>

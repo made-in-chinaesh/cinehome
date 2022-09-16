@@ -1,5 +1,5 @@
 import React from 'react'
-import CounterButton from '../CounterButton'
+import CounterButton from '../../adminUI/CounterButton'
 import cls from './Product.module.scss'
 
 export const Product = ({

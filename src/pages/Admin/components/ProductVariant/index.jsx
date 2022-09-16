@@ -1,6 +1,7 @@
 import React from 'react'
 import cls from './ProductVariant.module.scss'
-import CounterButton from '../CounterButton'
+import CounterButton from '../../adminUI/CounterButton'
+
 
 export const ProductVariant = ({
   id,
