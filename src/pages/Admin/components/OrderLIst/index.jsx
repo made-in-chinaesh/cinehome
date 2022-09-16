@@ -2,9 +2,6 @@ import React from 'react'
 import cls from './OrderList.module.scss'
 
 export const OrderList = ({ orderList }) => {
-  console.log(orderList)
-
-
   const totalCheck = orderList?.orders?.reduce((prev, current) => {
     return prev + current.totalPrice
   }, 0)
