@@ -38,7 +38,7 @@ export const OrderList = ({ orderList }) => {
 
       </div>
       <div className={cls.listFooter}>
-        <h3>итого: {totalCheck}</h3>
+        <h3>итого: {orderList?.check}</h3>
       </div>
     </div>
   )
