@@ -53,3 +53,11 @@ export const checkReport = (id, reportKey) => {
 
 export const deleteReport = (id, reportKey) => {
   return baseRequest.delete(`/workers/${id}/reports/${reportKey}.json`)
+}
+export const patchOrder = (workerId, orderId, body) => {
+  return baseRequest.patch(`/workers/${workerId}/reports/${orderId}.json`, body)
+}
+
+export const getOldOrder = (workerId, orderId) => {
+  return baseRequest.get(`/workers/${workerId}/reports/${orderId}.json`)
+}
