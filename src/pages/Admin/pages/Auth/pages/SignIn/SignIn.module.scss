@@ -4,14 +4,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('../../../../../../../public/img/2560x1440.png') center / cover;
-  .container {
+  background: url(https://assets.nflxext.com/ffe/siteui/vlv3/a795ee10-8c6d-467c-8159-254be2b69013/5d80ee68-1215-4da7-873f-097cbf98dc8b/KG-en-20220912-popsignuptwoweeks-perspective_alpha_website_large.jpg) center / cover;
+  form {
     width: 600px;
     padding: 30px;
     border-radius: 6px;
     background: #fff;
     display: flex;
     flex-direction: column;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 5px #1d1d1d;
+    color: #fff;
     h2 {
       font-size: 25px;
       font-weight: 400;

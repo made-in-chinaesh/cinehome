@@ -6,12 +6,11 @@
   align-items: center;
   justify-content: center;
   form {
-    width: 500px;
-    height: 600px;
+    width: 550px;
     margin: 20px;
-    background: #1d1d1de5;
+    background: rgba(0, 0, 0, 0.8);
     box-shadow: 0 0 5px #1d1d1d;
-    padding: 40px;
+    padding: 40px 60px;
     border-radius: 4px;
     display: flex;
     flex-direction: column;

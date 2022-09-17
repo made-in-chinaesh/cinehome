@@ -113,7 +113,7 @@ export const RegisterWorker = () => {
         <Button
           onClick={handleSubmit(onSubmit)}
           disabled={isLoading}
-          variant={isLoading ? ButtonVariants.loading : ButtonVariants.green}
+          variant={isLoading ? ButtonVariants.loading : ButtonVariants.blue}
         >Зарегистрировать</Button>
       </form>
     </div>

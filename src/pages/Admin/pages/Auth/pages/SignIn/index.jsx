@@ -22,13 +22,14 @@ export const SignIn = () => {
     handleSubmit,
   } = useForm()
 
-  const onSubmit = (data) => {
-    onAuth(data)
-  }
+  const onSubmit = (data) => onAuth(data)
 
   return (
     <div className={cls.root}>
-      <div className={cls.container}>
+      <form
+        className={cls.container}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <h2>Авторизация</h2>
         <Input
           type="email"
@@ -45,11 +46,11 @@ export const SignIn = () => {
           {...register('password', Forms.Options.Password)}
         />
         <Button
-          variant={isLoading ? ButtonVariants.loading : ButtonVariants.green}
+          variant={isLoading ? ButtonVariants.loading : ButtonVariants.blue}
           disabled={isLoading}
           onClick={handleSubmit(onSubmit)}
         >Войти</Button>
-      </div>
+      </form>
     </div>
   )
 }
