@@ -289,6 +289,17 @@ const useRoom = (roomId) => {
     return setProducts(findProduct)
   }
 
+  const deleteRoom = () => {
+    const request = Admin.API.deletSingleRoom(roomId)
+
+    request
+      .then(res => {
+        const data = res.data
+        console.log(data)
+        navigate(-1)
+      })
+  }
+
   React.useEffect(() => {
     getRooms()
     getProducts()
@@ -316,6 +327,7 @@ const useRoom = (roomId) => {
       getRooms,
       onChangeInput,
       getProducts,
+      deleteRoom,
     },
   }
 }

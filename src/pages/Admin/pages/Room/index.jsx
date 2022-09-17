@@ -66,7 +66,6 @@ const ActiveRoomTemplate = ({
         </RoomStartBtn>
       </div>
 
-
     </div>
   )
 }
@@ -81,70 +80,74 @@ const FreeRoomTemplate = ({
   handleSubmit,
   onSubmit,
   handleCategory,
+  deleteRoom,
 }) => {
   return (
-    <div className={cls.root}>
+    <>
+      <div className={cls.root}>
 
 
-      <form>
+        <form>
 
-        <label htmlFor="count">
-          <span>Количество персон</span> <br />
-          <input
-            id={cls.count}
-            type="number"
-            min="1"
-            {...register('clientCount', { required: true } )}
-          />
-        </label>
-
-        <label htmlFor="minute">
-          <span>Минут</span> <br />
-          <input
-            id="minute"
-            type="number"
-            min="1"
-            {...register('minute', { required: true })}
-          />
-        </label>
-      </form>
-
-
-      <div className={cls.categoryes}>
-        {
-          navigation.map(({ id, title, original_title }) => (
-            <h2 key={id}
-              className={id === category ? cls.activeCategory : cls.category}
-              onClick={() => handleCategory(original_title)}
-            >{title}</h2>
-          ))
-        }
-      </div>
-
-      <div className={cls.productsContainer}>
-        {
-          products ? products[category]?.map(({ key, title, count, price, totalPrice, productImg }) => (
-            <ProductVariant
-              key={key}
-              id={key}
-              title={title}
-              count={count}
-              price={price}
-              productImg={productImg}
-              increment={increment}
-              decrement={decrement}
-              totalPrice={totalPrice}
-
+          <label htmlFor="count">
+            <span>Количество персон</span> <br />
+            <input
+              id={cls.count}
+              type="number"
+              min="1"
+              {...register('clientCount', { required: true } )}
             />
-          )) : 'Пусто!'
-        }
-      </div>
+          </label>
+
+          <label htmlFor="minute">
+            <span>Минут</span> <br />
+            <input
+              id="minute"
+              type="number"
+              min="1"
+              {...register('minute', { required: true })}
+            />
+          </label>
+        </form>
 
 
-      <RoomStartBtn onClick={handleSubmit(onSubmit)}>
+        <div className={cls.categoryes}>
+          {
+            navigation.map(({ id, title, original_title }) => (
+              <h2 key={id}
+                className={id === category ? cls.activeCategory : cls.category}
+                onClick={() => handleCategory(original_title)}
+              >{title}</h2>
+            ))
+          }
+        </div>
+
+        <div className={cls.productsContainer}>
+          {
+            products ? products[category]?.map(({ key, title, count, price, totalPrice, productImg }) => (
+              <ProductVariant
+                key={key}
+                id={key}
+                title={title}
+                count={count}
+                price={price}
+                productImg={productImg}
+                increment={increment}
+                decrement={decrement}
+                totalPrice={totalPrice}
+
+              />
+            )) : <Loader isFullPage={true}/>
+          }
+        </div>
+
+
+        <RoomStartBtn onClick={handleSubmit(onSubmit)}>
             START
-      </RoomStartBtn>
-    </div>
+        </RoomStartBtn>
+      </div>
+      <CardButton children={'Удалить'} onClick={deleteRoom} className={cls.deleteButton}/>
+    </>
   )
 }
 
@@ -164,6 +167,7 @@ export const Room = () => {
       totalCheck,
       removeActivityRoom,
       patchLastOrder,
+      deleteRoom,
     },
   } = Admin.Hook.Room.use(roomId)
 
@@ -209,6 +213,7 @@ export const Room = () => {
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
       handleCategory={handleCategory}
+      deleteRoom={deleteRoom}
     />
   //   <div className={cls.root}>
 

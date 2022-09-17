@@ -75,3 +75,7 @@ export const getOldOrder = (workerId, orderId) => {
 export const addRoom = (body) => {
   return baseRequest.post('/rooms.json', body)
 }
+
+export const deletSingleRoom = (roomId) => {
+  return baseRequest.delete(`rooms/${roomId}.json`)
+}
