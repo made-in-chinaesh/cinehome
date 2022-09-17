@@ -35,7 +35,6 @@
       transition: 200ms;
       &:hover {
         background: #6a5acc;
-        transform: scale(1.05);
         border: 1px solid transparent;
       }
       h2 {
@@ -56,6 +55,23 @@
     100% {
       opacity: 1;
       transform: translateY(20px);
+    }
+  }
+}
+
+@media (max-width: 1320px) {
+  .root {
+    .priceContainer {
+      width: 96%;
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .root {
+    padding-bottom: 100px;
+    .priceContainer {
+      grid-template-columns: 1fr;
     }
   }
 }
