@@ -271,14 +271,16 @@ const useRoom = (roomId) => {
   }
 
   const onChangeInput = (e) => {
-    const value = e.target.value.toLowerCase()
+    const value = e.target.value
 
     if (value.length === 0) return setProducts(filteredProduct)
     console.log(value)
     const findProduct = products?.map(category => {
-      return category.filter(product => product.title.toLowerCase().includes(value))
+      return category.filter(({ title }) => {
+        console.log(title.toUpperCase().includes(value.toUpperCase()))
+        return title.toUpperCase().includes(value.toUpperCase())
+      })
     })
-    console.log(findProduct)
 
     if (!products) return
 

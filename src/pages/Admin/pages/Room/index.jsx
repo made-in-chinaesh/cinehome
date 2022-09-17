@@ -8,6 +8,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import cls from './Room.module.scss'
+import { CardButton } from 'pages/Admin/adminUI/CardButton'
 
 
 const ActiveRoomTemplate = ({
@@ -23,7 +24,6 @@ const ActiveRoomTemplate = ({
 }) => {
   return (
     <div className={cls.root}>
-
       {
         roomOrders ? <OrderList orderList={roomOrders}/> : <Loader/>
       }

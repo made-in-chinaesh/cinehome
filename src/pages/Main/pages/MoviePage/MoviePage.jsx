@@ -1,5 +1,6 @@
 import React from 'react'
 import cls from './MoviePage.module.scss'
+import Swal from 'sweetalert2'
 import { Loader } from 'components/Loader'
 import { useNavigate, useParams } from 'react-router-dom'
 import { BiMovie, BiSkipPrevious } from 'react-icons/bi'
@@ -7,7 +8,6 @@ import { posterUrl, swiperImageUrl } from 'pages/Main/api'
 import { Main } from 'pages/Main'
 import { MoviesSlider } from 'pages/Main/components/MoviesSlider/MoviesSlider'
 import { MovieTrailer } from 'pages/Main/components/MovieTrailer/MovieTrailer'
-import Swal from 'sweetalert2'
 
 const MovieInfoBar = ({
   title,
@@ -143,7 +143,6 @@ export const MoviePage = () => {
 
     getActors(movieId)
   }, [movieId])
-
 
   React.useEffect(() => {
     getMovie(movieId)
