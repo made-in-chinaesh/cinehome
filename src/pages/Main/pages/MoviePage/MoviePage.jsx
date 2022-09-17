@@ -121,6 +121,14 @@ export const MoviePage = () => {
       })
     }
 
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: isFavorite ? 'Успешно удалено!' : 'Добавлено в избранные',
+      showConfirmButton: false,
+      timer: 1500,
+    })
+
     if (isFavorite) {
       setIsFavorite(false)
       return removeFavorite(userId, movieId)
@@ -143,16 +151,10 @@ export const MoviePage = () => {
     getRecommend(movieId)
   }, [movieId])
 
-
-  React.useEffect(() => {
-    document.title = `${movie?.title} (${movie?.release_date})`
-  }, [movie?.id])
-
-
   React.useEffect(() => {
     const isFavoriteMovie = !!favorites?.find(({ id }) => id === Number(movieId))
     setIsFavorite(isFavoriteMovie)
-  }, [movieId])
+  }, [movieId, favorites])
 
   if (!movie || isLoading) return <Loader />
 
