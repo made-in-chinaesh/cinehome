@@ -1,4 +1,4 @@
-$headerBg: rgb(0, 159, 45); // #93e1d8
+$headerBg: rgba(0, 0, 0, 0.608); // #93e1d8
 $titleFontSize: 20px;
 .root {
   width: 100%;
@@ -19,10 +19,10 @@ $titleFontSize: 20px;
   }
   .listBody {
     .singleProduct:nth-child(odd) {
-      background-color: rgb(212, 212, 212);
+      background-color: #efefefbb;
     }
     .singleProduct:nth-child(even) {
-      background-color: #fff;
+      background-color: rgba(255, 255, 255, 0.824);
     }
     .singleProduct {
       width: 100%;

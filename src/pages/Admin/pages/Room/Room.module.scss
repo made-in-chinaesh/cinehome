@@ -1,6 +1,6 @@
 .root {
   width: 100%;
-  padding: 40px 4%;
+  padding: 1rem 15%;
   object-fit: cover;
   // background-color: #315659;
   background: url(https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80) center / cover fixed;
@@ -36,6 +36,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin: 20px 0;
+    background-color: rgba(0, 0, 0, 0.721);
 
     .category {
       padding: 1rem 0;
@@ -45,6 +46,9 @@
     }
 
     .activeCategory {
+      -moz-box-shadow: inset 0 -15px 15px -15px #fff;
+      -webkit-box-shadow: inset 0 -15px 15px -15px #fff;
+      box-shadow: inset 0 -15px 15px -15px #fff;
       border-bottom: 3px solid #fff;
       text-align: center;
       padding: 1rem 0;
@@ -54,8 +58,8 @@
   .productsContainer {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     width: 100%;
     gap: 20px;
-    padding: 1rem 15%;
   }
 }
