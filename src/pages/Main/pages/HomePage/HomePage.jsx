@@ -37,20 +37,15 @@ const peaplesPrice = [
 ]
 
 export const HomePage = () => {
-  const scrollBottom = React.useRef(null)
-
-  const bottomScroll = () => {
-    scrollBottom.current?.scrollIntoView({ behavoir: 'smooth' })
-  }
-
   return (
     <div className={cls.root}>
       <HomeSlider />
       <div className={cls.mouseContainer}>
-        <span className={cls.mouseBtn} onClick={() => bottomScroll()}>
+        <a href="#scroll" className={cls.mouseBtn} onClick={() => bottomScroll()}>
           <span className={cls.mouseScroll}></span>
-        </span>
+        </a>
       </div>
+      <div id="scroll" />
       <Price />
       <div className={cls.priceContainer}>
         {
@@ -67,7 +62,6 @@ export const HomePage = () => {
           ))
         }
       </div>
-      <div ref={scrollBottom} />
     </div>
   )
 }
