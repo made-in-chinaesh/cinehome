@@ -65,16 +65,16 @@
   margin: 20px 0;
   height: auto;
   div {
-    background-color: #7cc;
+    background-color: #efefef;
     border-radius: 6px;
   }
   :nth-child(1) {
     height: calc(200px + 120 * (100vw / 1320));
-    background-color: #7cc;
+    background-color: #efefef;
   }
   :nth-child(2) {
     height: 20px;
-    background-color: #7cc;
+    background-color: #efefef;
     margin-top: 5px;
   }
 }
