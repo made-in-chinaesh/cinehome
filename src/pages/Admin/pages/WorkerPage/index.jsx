@@ -4,7 +4,9 @@ import { Loader } from 'components/Loader'
 import { parseJSON } from 'helpers'
 import { Admin } from 'pages/Admin'
 import { useParams } from 'react-router-dom'
-
+import { AiFillCheckCircle, AiOutlineEye } from 'react-icons/ai'
+import { CardButton } from 'pages/Admin/adminUI/CardButton'
+import { CheckBox } from 'pages/Admin/adminUI/CheckBox'
 
 const ReportCards = ({
   report,
@@ -32,16 +34,19 @@ const ReportCards = ({
 
   return (
     <div className={cls.container}>
-      <div className={cls.card}>
-        <div style={{ background: isChecked ? 'green' : 'red' }}></div>
+      <div className={isChecked ? cls.checkedCard : cls.card}>
+        {
+          isChecked ? <AiFillCheckCircle size={30} color={'#0dc143'}/> : <AiOutlineEye size={30} color={'#2e93f0'} />
+        }
         <h2>Кол-во людей: {clientCount}</h2>
         <h2>Дата: {date}</h2>
         <h2>Время: {time}</h2>
         <p>Чек: {check}</p>
         {
-          !isChecked && <button onClick={() => checkReport(id, key)}>Check</button>
+          <CheckBox onClick={() => checkReport(id, key)} isChecked={isChecked}/>
         }
-        <button onClick={() => setIsActive(!isActive)}>{isActive ? 'закрыть' : 'открыть'}</button>
+        {/* <button onClick={() => setIsActive(!isActive)}>{isActive ? 'закрыть' : 'открыть'}</button> */}
+        <CardButton onClick={() => setIsActive(!isActive)} isDelete={false} children={isActive ? 'Закрыть' : 'Открыть'}/>
       </div>
       {
         isActive && <div className={cls.productsCard}>{children}</div>
@@ -123,7 +128,7 @@ export const WorkerPage = () => {
                 ))
               }
             </ReportCards>
-          )) : <h2>Pusto!</h2>
+          )) : <h2>Нет отчетов</h2>
         }
       </div>
     </div>

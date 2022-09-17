@@ -3,6 +3,7 @@ import cls from './WorkerCards.module.scss'
 import { Admin } from 'pages/Admin'
 import { Loader } from 'components/Loader'
 import { useNavigate } from 'react-router-dom'
+import { RoomStartBtn } from 'pages/Admin/adminUI/RoomStartBtn'
 
 export const WorkerCards = () => {
   const navigate = useNavigate()
@@ -27,7 +28,8 @@ export const WorkerCards = () => {
               >
                 <img src={photoUrl} alt="#" />
                 <h2>{firstName} {lastName}</h2>
-                <button onClick={() => navigate(`/admin/worker/reports/${key}`)}>Посмотреть отчеты</button>
+                <RoomStartBtn children={'Отчеты'} onClick={() => navigate(`/admin/worker/reports/${key}`)}/>
+                {/* <button onClick={() => navigate(`/admin/worker/reports/${key}`)}>Посмотреть отчеты</button> */}
               </div>
             ))
           }

@@ -15,7 +15,7 @@ export const DeleteProductModal = ({
     <div className={cls.root}>
       <VscChromeClose onClick={() => setIsActive(false)} />
       <div className={cls.container}>
-        <h2>Удаление</h2>
+        <h2>Подтвердите действие</h2>
         <Button
           disabled={isLoading}
           variant={isLoading ? ButtonVariants.loading : ButtonVariants.blue}

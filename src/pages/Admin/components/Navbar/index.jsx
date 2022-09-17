@@ -30,7 +30,7 @@ export const Navbar = () => {
             key={id}
             to={to}
             className={({ isActive }) => {
-              return isActive ? cls.red : null
+              return isActive ? cls.active : null
             }}
           >{title}</NavLink>
         ))

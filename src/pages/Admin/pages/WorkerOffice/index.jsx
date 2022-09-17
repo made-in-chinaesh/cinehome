@@ -7,6 +7,7 @@ import { AddProductsModal } from 'pages/Admin/components/AddProductsModal'
 import { AddRoomModal } from 'pages/Admin/components/AddRoomModal'
 import { Loader } from 'components/Loader'
 import { CardForWorker } from 'pages/Admin/components/CardForWorker'
+import { SearchInput } from 'pages/Admin/adminUI/SearchInput'
 
 export const WorkerOffice = () => {
   const workerId = localStorage.getItem('workerId')
@@ -54,10 +55,11 @@ export const WorkerOffice = () => {
             }
           </div>
           <div className={cls.options}>
-            <input type="text" placeholder="Поиск" onChange={onChangeInput} />
-            <button onClick={() => setAddRoomModalActive(true)}>Добавить новую комнату</button>
-            <button onClick={() => setAddProductModalActive(true)}>Добавить продукт</button>
+            <button onClick={() => setAddRoomModalActive(true)}>Добавить новую комнату +</button>
+            <button onClick={() => setAddProductModalActive(true)}>Добавить продукт +</button>
+            {/* <input type="text" placeholder="Поиск" onChange={onChangeInput} /> */}
           </div>
+          <SearchInput onChange={onChangeInput}/>
           <div className={cls.productsContainer}>
             {
               products ? products?.map((category) => {
@@ -70,7 +72,7 @@ export const WorkerOffice = () => {
                     />
                   )
                 ))
-              }) : <h1>Пусто</h1>
+              }) : <h4 className={cls.emptyText}>Ничего не найдено</h4>
             }
           </div>
         </div>

@@ -47,7 +47,7 @@ export const AddProductsModal = ({
   const onSubmit = (data) => {
     const body = {
       count: 0,
-      price: data.price,
+      price: +data.price,
       productImg: image,
       title: data.title,
       totalPrice: 0,
