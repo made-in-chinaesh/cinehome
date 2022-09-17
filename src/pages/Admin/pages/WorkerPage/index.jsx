@@ -24,8 +24,11 @@ const ReportCards = ({
   } = report
 
   const [isActive, setIsActive] = React.useState(false)
+  const [checked, setChecked] = React.useState(false)
+
 
   const checkReport = (id, reportKey) => {
+    setChecked(true)
     const request = Admin.API.checkReport(id, reportKey)
 
     request
@@ -36,17 +39,15 @@ const ReportCards = ({
     <div className={cls.container}>
       <div className={isChecked ? cls.checkedCard : cls.card}>
         {
-          isChecked ? <AiFillCheckCircle size={30} color={'#0dc143'}/> : <AiOutlineEye size={30} color={'#2e93f0'} />
+          <CheckBox onClick={(e) => checkReport(id, key)} isChecked={isChecked ? isChecked : checked} style={{ margin: 'auto 0' }}/>
         }
         <h2>Кол-во людей: {clientCount}</h2>
         <h2>Дата: {date}</h2>
         <h2>Время: {time}</h2>
         <p>Чек: {check}</p>
-        {
-          <CheckBox onClick={() => checkReport(id, key)} isChecked={isChecked}/>
-        }
-        {/* <button onClick={() => setIsActive(!isActive)}>{isActive ? 'закрыть' : 'открыть'}</button> */}
+
         <CardButton onClick={() => setIsActive(!isActive)} isDelete={false} children={isActive ? 'Закрыть' : 'Открыть'}/>
+        <CardButton children={'Удалить'}/>
       </div>
       {
         isActive && <div className={cls.productsCard}>{children}</div>

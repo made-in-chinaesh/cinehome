@@ -1,29 +1,28 @@
 .container {
-  display: block;
-  height: 1.5em;
-  width: 1.5em;
-  cursor: pointer;
-  position: relative;
+  display: block !important;
+  height: 1.5em !important;
+  width: 1.5em !important;
+  cursor: pointer !important;
+  position: relative !important;
   input {
-    position: absolute;
-    transform: scale(0);
+    position: absolute !important;
+    transform: scale(0) !important;
     &:checked~.checkmark {
-      transform: rotate(45deg);
-      height: 2em;
-      width: .7em;
-      border-color: #32cd32;
-      border-top-color: transparent;
-      border-left-color: transparent;
-      border-radius: 0;
+      transform: rotate(45deg) !important;
+      height: 2em !important;
+      width: .7em !important;
+      border-color: #32cd32 !important;
+      border-top-color: transparent !important;
+      border-left-color: transparent !important;
+      border-radius: 0 !important;
     }
   }
   .checkmark {
-    display: block;
-    width: inherit;
-    height: inherit;
-    border: 2px solid #32cd32;
-    border-radius: 4px;
-    transition: all .3s;
+    display: block !important;
+    width: inherit !important;
+    height: inherit !important;
+    border: 2px solid #32cd32 !important;
+    border-radius: 4px !important;
+    transition: all .3s !important;
   }
-
 }
