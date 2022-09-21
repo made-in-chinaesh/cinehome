@@ -28,7 +28,7 @@ export const FavoritesPage = () => {
 
   if (!userId) return <NoAccess />
 
-  if (isLoadingFavorites) return <Loader />
+  if (isLoadingFavorites) return <Loader isWhite={true} />
 
   if (!favorites || !favorites.length) return <EmptyFavorites />
 

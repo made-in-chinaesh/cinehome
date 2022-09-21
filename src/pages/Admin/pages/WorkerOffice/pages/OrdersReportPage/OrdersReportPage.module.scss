@@ -1,0 +1,46 @@
+.root {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  padding: 20px;
+
+  h1 {
+    font-size: 25px;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  .orders {
+    width: 100%;
+    height: 100%;
+    // height: 80vh;
+    display: flex;
+    flex-direction: column;
+    // overflow: auto;
+  }
+
+  button {
+    margin-top: auto;
+    padding: 15px;
+    border-radius: 6px;
+    background: #7a5acc;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+
+    &:active {
+      background: #4800ff;
+    }
+  }
+}
+
+.ordersReportSkeleton {
+  padding: 20px;
+  div:nth-child(1) {
+    width: 200px;
+    padding: 10px;
+    height: 10px;
+    background: #e1e9ee;
+  }
+}

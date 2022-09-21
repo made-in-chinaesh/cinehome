@@ -1,0 +1,53 @@
+.root {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gainsboro;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  height: 100px;
+
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  div {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+
+    button {
+      width: 100px;
+      padding: 10px;
+      border-radius: 4px;
+      background: #7a5acc;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      margin: 0 10px;
+      transition: 200ms;
+      cursor: pointer;
+
+      &:active {
+        background: #4800ff;
+      }
+    }
+  }
+}
+
+.productCardsSkeleton {
+  width: 100%;
+  height: 100px;
+  padding: 0 !important;
+  box-shadow: 0 0 5px gainsboro;
+  background: #e1e9ee;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}

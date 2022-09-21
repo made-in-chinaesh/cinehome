@@ -11,7 +11,8 @@ export const EditProductModal = ({
   isActive,
   setIsActive,
   product,
-  getProducts,
+  isLoading,
+  editProduct,
 }) => {
   const {
     image,
@@ -29,21 +30,8 @@ export const EditProductModal = ({
     reset,
   } = useForm()
 
-  const [isLoading, setIsLoading] = React.useState(false)
-
   const handleImage = (value) => {
     imageReader(value[0])
-  }
-
-  const editProduct = (body) => {
-    const request = Admin.API.editProduct(body.type, body.key, body)
-    setIsLoading(true)
-    request
-      .then(() => {
-        setIsActive(false)
-        getProducts()
-      })
-      .finally(() => setIsLoading(false))
   }
 
   const onSubmit = (data) => {
@@ -51,9 +39,11 @@ export const EditProductModal = ({
       ...product,
       title: data.title,
       price: data.price,
+      type: data.type,
       productImg: image,
     }
 
+    setIsActive(false)
     return editProduct(body)
   }
 
@@ -69,6 +59,16 @@ export const EditProductModal = ({
       <VscChromeClose onClick={() => setIsActive(false)} />
       <div className={cls.container}>
         <h2>Изменить продукт</h2>
+        <label>
+          <span>Тип продукта</span>
+          <select
+            {...register('type', Forms.Options.SimpleField)}
+          >
+            <option value="beverages">Напитки</option>
+            <option value="hookah">Кальян</option>
+            <option value="snacks">Закуски</option>
+          </select>
+        </label>
         <Input
           label="Название"
           placeholder="Введите название продукта"

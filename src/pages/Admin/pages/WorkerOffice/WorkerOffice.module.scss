@@ -1,162 +1,109 @@
 .root {
   width: 100%;
-  padding: 40px 0;
-  background-color: #315659;
-  .container {
-    width: 1300px;
-    margin: 0 auto;
-    .roomsContainer {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      grid-gap: 20px;
-
-      .roomBlock {
-        aspect-ratio: 1 / 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        position: relative;
-        transition: all .4s ease;
-        border: 3px solid #253031;
-        &:hover {
-          transform: scale(1.02);
-          z-index: 5;
-        }
-        &::before {
-          content: '';
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          background-color: rgba($color: #000000, $alpha: .6);
-          transition: all .4s ease;
-          opacity: 0;
-          z-index: 2;
-        }
-        &:hover::before, &:hover span {
-          opacity: 1;
-        }
-        img {
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          object-fit: cover;
-        }
-        span {
-          color: #fff;
-          font-size: 25px;
-          z-index: 3; 
-          transition: all .6s ease;
-          opacity: 0;
-          text-shadow: 0px 0px rgba(255, 255, 255, 1);
-        }
-      }
-      .activeRoomBlock {
-        aspect-ratio: 1 / 1;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         cursor: pointer;
-         position: relative;
-         transition: all .4s ease;
-         border: 3px solid #253031;
-      
-         &:hover {
-           transform: scale(1.02);
-           z-index: 5;
-         }
-      
-         &::before {
-           content: '';
-           width: 100%;
-           height: 100%;
-           position: absolute;
-           background-color: #50cb2098;
-           transition: all .4s ease;
-           z-index: 2;
-         }
-      
-         &:hover::before,
-         &:hover span {
-           opacity: 1;
-         }
-      
-         img {
-           width: 100%;
-           height: 100%;
-           position: absolute;
-           top: 0;
-           left: 0;
-           object-fit: cover;
-         }
-      
-         span {
-           color: #fff;
-           font-size: 25px;
-           z-index: 3;
-           transition: all .6s ease;
-           opacity: 0;
-           text-shadow: 0px 0px rgba(255, 255, 255, 1);
-         }
-       }
-    }
-  
-    .productsContainer {
+  height: 100vh;
+  display: flex;
+  background: #fff;
+  ::-webkit-scrollbar {
+    width: 5px !important;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 6px !important;
+    background: #000 !important;
+  }
+  .navbar {
+    width: 25%;
+    background: #f8f8fa;
+    display: flex;
+    flex-direction: column;
+    .header  {
+      margin: 10px;
+      padding: 15px;
       display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      width: 100%;
-      min-height: 60vh;
-      box-sizing: border-box;
-      gap: 20px;
-      
-      .emptyText {
-        color: #fff;
+      align-items: center;
+      background: #fff;
+      border-radius: 6px;
+      transition: 200ms;
+      box-shadow: 0 0 10px gainsboro;
+      img {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 50%;
+        transition: 200ms;
+        &:hover {
+          transform: scale(1.1);
+        }
       }
-      
+      p {
+        margin-left: 10px;
+      }
     }
-    .options {
-      width: 100%;
+    .nav {
+      nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        margin: 10px;
+        a {
+          text-decoration: none;
+          padding: 10px;
+          background-color: #fff;
+          border-radius: 30px;
+          font-size: 18px;
+          color: #000;
+          text-align: center;
+          transition: 200ms;
+          &:hover {
+            box-shadow: 0 0 5px gainsboro;
+          }
+        }
+      }
+    }
+    .reportsContainer {
       display: flex;
       flex-direction: column;
-      button {
-        padding: 15px;
-        font-size: 18px;
-        background: #000;
-        color: #fff;
-        border-radius: 4px;
-        border: 1px solid #000;
-        margin: 10px 0;
-        cursor: pointer;
-        transition: 200ms;
-        &:hover {
-          background: #fff;
-          color: #000;
-        }
+      height: 100%;
+      h1 {
+        font-size: 20px;
+        font-weight: 500;
+        text-align: center;
+        padding: 10px 0;
+        border-bottom: 1px solid gainsboro;
+        margin-bottom: 10px
       }
-      input {
-        padding: 15px;
-        font-size: 18px;
-        border-radius: 4px;
-      width: 1300px;
-        border: gray;
-        margin: 5px 0;
-        outline: none;
-        transition: 200ms;
-        &:focus {
-          box-shadow: 0 0 0 5px #7cc;
+      .reports {
+        overflow: auto;
+        padding: 10px;
+        height: 75vh;
+        div {
+          padding: 30px 10px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: #fff;
+          margin-bottom: 10px;
+          border-radius: 6px;
+          transition: 200ms;
+          box-shadow: 0 0 5px gainsboro;
+          cursor: pointer;
+          &:hover {
+            background: #7a5acc;
+            color: #fff;
+          }
+          h2 {
+            font-size: 16px;
+            font-weight: 400;
+          }
+          h5 {
+            font-size: 16px;
+            font-weight: 400;
+          }
         }
       }
     }
   }
-}
-
-@media (max-width: 1398px) {
-  .root {
-    .productsContainer {
-      padding: 3rem 5%;
-    }
+  .container {
+    width: 75%;
+    overflow: auto;
   }
 }

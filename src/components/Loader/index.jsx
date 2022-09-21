@@ -1,15 +1,18 @@
 import React from 'react'
 import cls from './Loader.module.scss'
 
-export const Loader = ({ isFullPage = false }) => {
-  const style = isFullPage ? { height: '80vh' } : { height: 150 }
+export const Loader = ({
+  isFullPage = false,
+  isWhite = false,
+}) => {
+  const heightStyle = isFullPage ? { height: '80vh' } : { height: 150 }
 
   return (
     <div
       className={cls.root}
-      style={style}
+      style={heightStyle}
     >
-      <span></span>
+      <span className={isWhite ? cls.isWhite : cls.isBlack}></span>
     </div>
   )
 }

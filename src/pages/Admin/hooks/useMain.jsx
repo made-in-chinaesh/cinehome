@@ -4,6 +4,7 @@ import { Admin } from '..'
 
 const useMain = () => {
   const [workers, setWorkers] = React.useState(null)
+  const [worker, setWorker] = React.useState(null)
   const [admin, setAdmin] = React.useState(null)
 
   const getAdmin = () => {
@@ -16,7 +17,6 @@ const useMain = () => {
       })
   }
 
-
   const getWorkers = () => {
     const request = Admin.API.getWorkers()
 
@@ -28,6 +28,16 @@ const useMain = () => {
       })
   }
 
+  const getWorker = (id) => {
+    const request = Admin.API.getWorker(id)
+
+    request
+      .then(res => {
+        const data = res.data
+        setWorker(data)
+      })
+  }
+
   React.useEffect(() => {
     getAdmin()
     getWorkers()
@@ -36,6 +46,10 @@ const useMain = () => {
   return {
     workers,
     admin,
+    worker,
+    actions: {
+      getWorker,
+    },
   }
 }
 

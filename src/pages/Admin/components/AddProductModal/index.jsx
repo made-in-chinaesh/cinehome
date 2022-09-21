@@ -7,10 +7,11 @@ import { Admin } from 'pages/Admin'
 import { Button, ButtonVariants } from 'components/UI/Button'
 import { VscChromeClose } from 'react-icons/vsc'
 
-export const AddProductsModal = ({
+export const AddProductModal = ({
   isActive,
   setIsActive,
-  getProducts,
+  postProduct,
+  isLoading,
 }) => {
   const {
     register,
@@ -27,22 +28,10 @@ export const AddProductsModal = ({
     },
   } = Admin.Hook.FileReader.use()
 
-  const [isLoading, setIsLoading] = React.useState(false)
-
   const handleImage = (value) => {
     imageReader(value[0])
   }
 
-  const postProduct = (body) => {
-    const request = Admin.API.postProduct(body)
-    setIsLoading(true)
-    request
-      .then(() => {
-        setIsActive(false)
-        getProducts()
-      })
-      .finally(() => setIsLoading(false))
-  }
 
   const onSubmit = (data) => {
     const body = {
@@ -54,7 +43,7 @@ export const AddProductsModal = ({
       type: data.type,
     }
 
-
+    setIsActive(false)
     return postProduct(body)
   }
 
@@ -63,7 +52,10 @@ export const AddProductsModal = ({
   return (
     <div className={cls.root}>
       <VscChromeClose onClick={() => setIsActive(false)} />
-      <div className={cls.container}>
+      <div
+        className={cls.container}
+        data-aos="fade-up"
+      >
         <h2>Добавить продукт</h2>
         <label>
           <span>Тип продукта</span>

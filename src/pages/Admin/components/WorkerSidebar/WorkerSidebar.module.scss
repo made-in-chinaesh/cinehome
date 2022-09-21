@@ -1,0 +1,132 @@
+.root {
+  width: 25%;
+  background: #f8f8fa;
+  display: flex;
+  flex-direction: column;
+  .header {
+    margin: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 6px;
+    transition: 200ms;
+    box-shadow: 0 0 10px gainsboro;
+    img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: 200ms;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+    p {
+      margin-left: 10px;
+    }
+  }
+  .nav {
+    nav {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 10px;
+      margin: 10px;
+      a {
+        text-decoration: none;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 30px;
+        font-size: 18px;
+        color: #000;
+        text-align: center;
+        transition: 200ms;
+        &:hover {
+          box-shadow: 0 0 5px gainsboro;
+        }
+      }
+    }
+  }
+  .reportsContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    h1 {
+      font-size: 20px;
+      font-weight: 500;
+      text-align: center;
+      padding: 10px 0;
+      border-bottom: 1px solid gainsboro;
+      margin-bottom: 10px
+    }
+    .reports {
+      overflow: auto;
+      padding: 10px;
+      height: 75vh;
+      div {
+        padding: 30px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        transition: 200ms;
+        box-shadow: 0 0 5px gainsboro;
+        cursor: pointer;
+        &:hover {
+          background: #7a5acc;
+          color: #fff;
+        }
+        h2 {
+          font-size: 16px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
+
+.headerSkeleton {
+  margin: 10px;
+  padding: 15px;
+  border-radius: 4px;
+  box-shadow: 0 0 5px #e1e9ee;
+  background: #fff;
+  display: flex;
+  align-items: center;
+
+  div {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #e1e9ee;
+  }
+
+  section {
+    width: 150px;
+    margin-left: 10px;
+    background-color: #e1e9ee;
+    padding: 10px;
+    border-radius: 6px;
+  }
+}
+
+.reportsSkeleton {
+  padding: 30px 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  background: #fff !important;
+  margin-bottom: 10px !important;
+  border-radius: 6px !important;
+  transition: 200ms !important;
+  cursor: pointer !important;
+
+  div {
+    width: 100px !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+    background: #e1e9ee !important;
+  }
+}

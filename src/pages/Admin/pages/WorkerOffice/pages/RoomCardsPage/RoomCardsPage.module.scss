@@ -1,0 +1,52 @@
+.root {
+  padding: 20px;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  h1 {
+    margin-bottom: 10px;
+    font-size: 25px;
+    font-weight: 400;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+  }
+  button {
+    margin-top: auto;
+    padding: 15px;
+    border-radius: 6px;
+    background: #7a5acc;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    &:active {
+      background: #4800ff;
+    }
+  }
+}
+
+.roomCardsPageSkeleton {
+  padding: 20px;
+  div:nth-child(1) {
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    background: #e1e9ee;
+    box-shadow: 0 0 5px gainsboro;
+    margin-bottom: 10px;
+  }
+  div:nth-child(2) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    section {
+      border-radius: 10px;
+      background: #e1e9ee;
+      box-shadow: 0 0 5px gainsboro;
+      height: 200px;
+    }
+  }
+}
