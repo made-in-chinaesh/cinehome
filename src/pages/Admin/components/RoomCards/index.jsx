@@ -6,9 +6,10 @@ export const RoomCards = ({
   isActive,
   index,
   children,
+  onClick,
 }) => {
   return (
-    <div className={cls.root}>
+    <div className={cls.root} onClick={onClick}>
       <img src={roomImage} alt="#" />
       <p>Комната {index} {isActive && '(занято)'}</p>
       {children}

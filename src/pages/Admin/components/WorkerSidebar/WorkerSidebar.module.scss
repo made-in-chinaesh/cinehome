@@ -51,6 +51,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    padding-bottom: 20px;
     h1 {
       font-size: 20px;
       font-weight: 500;
@@ -62,7 +63,7 @@
     .reports {
       overflow: auto;
       padding: 10px;
-      height: 75vh;
+      height: 100%;
       div {
         padding: 30px 10px;
         display: flex;
@@ -82,6 +83,20 @@
           font-size: 16px;
           font-weight: 400;
         }
+      }
+    }
+    .orderBtn {
+      margin-top: auto;
+      padding: 15px;
+      border-radius: 6px;
+      background: #7a5acc;
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      margin: 0 10px;
+      &:active {
+        background-color: blue;
       }
     }
   }

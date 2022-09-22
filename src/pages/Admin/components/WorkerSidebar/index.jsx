@@ -2,6 +2,7 @@ import React from 'react'
 import cls from './WorkerSidebar.module.scss'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { parseJSON } from 'helpers'
+import { AddOrderModal } from '../AddOrderModal'
 
 const WorkerHeaderSkeleton = () => {
   return (
@@ -32,9 +33,12 @@ const ReportCardsSkeleton = () => {
 export const WorkerSidebar = ({
   workerId,
   worker,
+  products,
+  rooms,
 }) => {
   const navigate = useNavigate()
   const location = useLocation()
+  const [isActiveOrderModal, setIsActiveOrderModal] = React.useState(false)
 
   const navigation = [
     {
@@ -56,57 +60,72 @@ export const WorkerSidebar = ({
   const reports = parseJSON(worker?.reports)
 
   return (
-    <div className={cls.root}>
-      {
-        worker ?
-          <div className={cls.header}>
-            <img src={worker.photoUrl} alt="#" />
-            <p>{worker.firstName} {worker.lastName}</p>
-          </div> :
-          <WorkerHeaderSkeleton />
-      }
-      <div className={cls.nav}>
-        <nav>
-          {
-            navigation.map(({ title, to, id }) => (
-              <NavLink
-                key={id}
-                to={to}
-                style={({ isActive }) => {
-                  return isActive ?
-                    {
-                      background: '#7a5acc',
-                      color: '#fff',
-                    } : null
-                }}
-              >{title}</NavLink>
-            ))
-          }
-        </nav>
-      </div>
-      <div className={cls.reportsContainer}>
-        <h1>{!reports?.length ? 'Ваш список пуст' : 'Ваши отчеты'}</h1>
-        <div className={cls.reports}>
-          {
-            worker ? reports?.map(({ check, date, key }) => (
-              <div
-                key={key}
-                onClick={() => navigate(`/admin/worker/${workerId}/report/${key}`)}
-                style={
-                  reportIdShorter(key) === key ?
-                    {
-                      background: '#7a5acc',
-                      color: '#fff',
-                    } : null
-                }
-              >
-                <h2>Чек: {check}</h2>
-                <p>{date}</p>
-              </div>
-            )) : <ReportCardsSkeleton />
-          }
+    <>
+      <div className={cls.root}>
+        {
+          worker ?
+            <div className={cls.header}>
+              <img src={worker.photoUrl} alt="#" />
+              <p>{worker.firstName} {worker.lastName}</p>
+            </div> :
+            <WorkerHeaderSkeleton />
+        }
+        <div className={cls.nav}>
+          <nav>
+            {
+              navigation.map(({ title, to, id }) => (
+                <NavLink
+                  key={id}
+                  to={to}
+                  style={({ isActive }) => {
+                    return isActive ?
+                      {
+                        background: '#7a5acc',
+                        color: '#fff',
+                      } : null
+                  }}
+                >{title}</NavLink>
+              ))
+            }
+          </nav>
+        </div>
+        <div className={cls.reportsContainer}>
+          <h1>{!reports?.length ? 'Ваш список пуст' : 'Ваши отчеты'}</h1>
+          <div className={cls.reports}>
+            {
+              worker ? reports?.map(({ check, date, key }) => (
+                <div
+                  key={key}
+                  onClick={() => navigate(`/admin/worker/${workerId}/report/${key}`)}
+                  style={
+                    reportIdShorter(key) === key ?
+                      {
+                        background: '#7a5acc',
+                        color: '#fff',
+                      } : null
+                  }
+                >
+                  <h2>Чек: {check}</h2>
+                  <p>{date}</p>
+                </div>
+              )) : <ReportCardsSkeleton />
+            }
+          </div>
+          <button
+            className={cls.orderBtn}
+            onClick={() => setIsActiveOrderModal(true)}
+          >Сделать заказ</button>
         </div>
       </div>
-    </div>
+      {
+        isActiveOrderModal &&
+        <AddOrderModal
+          products={products}
+          rooms={rooms}
+          isActive={isActiveOrderModal}
+          setIsActive={setIsActiveOrderModal} />
+      }
+    </>
+
   )
 }

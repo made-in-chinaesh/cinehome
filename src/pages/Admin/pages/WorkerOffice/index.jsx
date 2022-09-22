@@ -10,6 +10,7 @@ import { RoomCardsPage } from './pages/RoomCardsPage'
 export const WorkerOffice = () => {
   const { workerId } = useParams()
 
+
   const {
     worker,
     actions: {
@@ -45,6 +46,8 @@ export const WorkerOffice = () => {
         <WorkerSidebar
           workerId={workerId}
           worker={worker}
+          products={products}
+          rooms={rooms}
         />
         <div className={cls.container}>
           <Routes>
