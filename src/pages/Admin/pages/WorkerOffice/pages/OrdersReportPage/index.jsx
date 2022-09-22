@@ -1,7 +1,7 @@
 import React from 'react'
 import cls from './OrdersReportPage.module.scss'
 import { OrdersReportCards, OrdersReportCardsSkeleton } from 'pages/Admin/components/OrdersReportCards'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { parseJSON } from 'helpers'
 
 const OrdersReportSkeleton = () => {
@@ -14,7 +14,6 @@ const OrdersReportSkeleton = () => {
     </div>
   )
 }
-
 export const OrdersReportPage = ({
   worker,
   deleteOrder,
