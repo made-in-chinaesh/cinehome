@@ -85,8 +85,11 @@ export const getOldOrder = (workerId, orderId) => {
 
 export const deleteOrder = (workerId, orderId) => {
   return baseRequest.delete(`/workers/${workerId}/reports/${orderId}.json`)
+<<<<<<< HEAD
 }
 
 export const deletSingleRoom = (roomId) => {
   return baseRequest.delete(`rooms/${roomId}.json`)
+=======
+>>>>>>> 413fe14 (last)
 }

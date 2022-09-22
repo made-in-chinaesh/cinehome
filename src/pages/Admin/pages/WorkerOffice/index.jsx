@@ -10,7 +10,6 @@ import { RoomCardsPage } from './pages/RoomCardsPage'
 export const WorkerOffice = () => {
   const { workerId } = useParams()
 
-
   const {
     worker,
     actions: {

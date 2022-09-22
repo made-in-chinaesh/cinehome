@@ -126,6 +126,5 @@ export const WorkerSidebar = ({
           setIsActive={setIsActiveOrderModal} />
       }
     </>
-
   )
 }
