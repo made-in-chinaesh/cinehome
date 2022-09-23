@@ -51,7 +51,7 @@ const useSignIn = () => {
             },
           })
 
-          localStorage.setItem('workerId', isWorker.key)
+          sessionStorage.setItem('workerId', isWorker.key)
           return setTimeout(() => {
             navigate(`/admin/worker/${isWorker.key}/`)
           }, 1500)

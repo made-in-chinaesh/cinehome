@@ -110,10 +110,10 @@ export const WorkerSidebar = ({
           </nav>
         </div>
         <div className={cls.reportsContainer}>
-          <h1>{!reports?.length ? 'Ваш список пуст' : 'Ваши отчеты'}</h1>
+          <h1>Ваши отчеты</h1>
           <div className={cls.reports}>
             {
-              !isLoadingReports ? reports?.map(({ personCount, date, key }) => (
+              !isLoadingReports ? reports?.map(({ isChecked, date, key }) => (
                 <div
                   key={key}
                   onClick={() => navigate(`/admin/worker/${workerId}/report/${key}`)}
@@ -125,8 +125,8 @@ export const WorkerSidebar = ({
                       } : null
                   }
                 >
-                  <h2>Кол-во персон: {personCount}</h2>
                   <p>{date}</p>
+                  <h2>{isChecked ? 'Проверено' : 'Просматривается'}</h2>
                 </div>
               )) : <ReportCardsSkeleton />
             }
