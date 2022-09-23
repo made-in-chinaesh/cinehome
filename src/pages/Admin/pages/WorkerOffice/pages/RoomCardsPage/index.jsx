@@ -54,7 +54,7 @@ export const RoomCardsPage = ({
         <h1>Комнаты</h1>
         <div className={cls.container}>
           {
-            rooms?.map(({ roomImage, isActive, key, order, personCount }, index) => (
+            rooms?.map(({ roomImage, isActive, key, order, personCount, check }, index) => (
               <RoomCards
                 key={key}
                 index={index + 1}
@@ -64,6 +64,7 @@ export const RoomCardsPage = ({
                 roomId={key}
                 completeRoomOrder={completeRoomOrder}
                 personCount={personCount}
+                check={check}
               >
                 <button onClick={() => onDelete(key)}>Удалить</button>
               </RoomCards>

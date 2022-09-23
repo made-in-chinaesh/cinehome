@@ -9,6 +9,7 @@ export const RoomOrderModal = ({
   roomId,
   completeRoomOrder,
   personCount,
+  check,
 }) => {
   const onSubmit = (roomId) => {
     completeRoomOrder(roomId)
@@ -48,6 +49,9 @@ export const RoomOrderModal = ({
                 </ProductCards>
               ))
           }
+        </div>
+        <div className={cls.checkContainer}>
+          <h2>Общая сумма закупки: {check}</h2>
         </div>
         <div className={cls.finishBtnContainer}>
           <button onClick={() => onSubmit(roomId)}>Завершить активность</button>

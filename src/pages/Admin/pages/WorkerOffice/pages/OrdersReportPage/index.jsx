@@ -36,6 +36,8 @@ export const OrdersReportPage = ({
   }
 
   const newReports = reports?.find(item => item.key === id)
+  console?.log(newReports)
+
   return (
     <div className={cls.root}>
       <h1>Заказ</h1>

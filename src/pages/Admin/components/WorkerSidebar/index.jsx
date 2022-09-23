@@ -111,26 +111,38 @@ export const WorkerSidebar = ({
         </div>
         <div className={cls.reportsContainer}>
           <h1>Ваши отчеты</h1>
-          <div className={cls.reports}>
-            {
-              !isLoadingReports ? reports?.map(({ isChecked, date, key }) => (
-                <div
-                  key={key}
-                  onClick={() => navigate(`/admin/worker/${workerId}/report/${key}`)}
-                  style={
-                    reportIdShorter(key) === key ?
-                      {
-                        background: '#7a5acc',
-                        color: '#fff',
-                      } : null
-                  }
-                >
-                  <p>{date}</p>
-                  <h2>{isChecked ? 'Проверено' : 'Просматривается'}</h2>
-                </div>
-              )) : <ReportCardsSkeleton />
-            }
-          </div>
+          {
+            !reports?.length ? <div
+              style={{
+                height: 300,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <h2>Ваш список пуст</h2>
+            </div> :
+              <div className={cls.reports}>
+                {
+                  !isLoadingReports ? reports?.map(({ isChecked, date, key }) => (
+                    <div
+                      key={key}
+                      onClick={() => navigate(`/admin/worker/${workerId}/report/${key}`)}
+                      style={
+                        reportIdShorter(key) === key ?
+                          {
+                            background: '#7a5acc',
+                            color: '#fff',
+                          } : null
+                      }
+                    >
+                      <p>{date}</p>
+                      <h2>{isChecked ? 'Проверено' : 'Просматривается'}</h2>
+                    </div>
+                  )) : <ReportCardsSkeleton />
+                }
+              </div>
+          }
         </div>
         <div className={cls.orderBtnContainer}>
           <button

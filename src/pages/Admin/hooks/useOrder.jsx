@@ -52,6 +52,7 @@ const useOrder = () => {
           personCount: body.personCount,
           date: new Date().toLocaleDateString(),
           isChecked: false,
+          check: body.check,
         }
         postOrder(workerId, postOrderBody, getRooms, getReports)
         setIsActive(false)

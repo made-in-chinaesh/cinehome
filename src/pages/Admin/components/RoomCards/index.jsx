@@ -11,6 +11,7 @@ export const RoomCards = ({
   roomId,
   completeRoomOrder,
   personCount,
+  check,
 }) => {
   const [isActiveRoomOrderModal, setIsActiveRoomOrderModal] = React.useState(false)
 
@@ -32,6 +33,7 @@ export const RoomCards = ({
           roomId={roomId}
           completeRoomOrder={completeRoomOrder}
           personCount={personCount}
+          check={check}
         />
       }
     </>
