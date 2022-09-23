@@ -42,7 +42,9 @@ export const RoomOrderModal = ({
                   product={product}
                   isWorker={false}
                 >
-                  <p>Выбрано: {product.count}шт</p>
+                  <p style={{
+                    marginLeft: 20,
+                  }}>Выбрано: {product.count}шт</p>
                 </ProductCards>
               ))
           }
