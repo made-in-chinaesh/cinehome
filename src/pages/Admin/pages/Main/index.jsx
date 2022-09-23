@@ -8,6 +8,9 @@ import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
 import AdminBtn from 'pages/Admin/adminUI/AdminBtn'
 import { RoomCards } from 'pages/Admin/components/RoomCards'
+import { AddRoomModal } from 'pages/Admin/components/AddRoomModal'
+import { ProductCards } from 'pages/Admin/components/ProductCards'
+import { AddProductModal } from 'pages/Admin/components/AddProductModal'
 
 const WorkersCard = ({
   worker,
@@ -75,9 +78,15 @@ export const Main = () => {
   } = Admin.Hook.Main.use()
   const {
     rooms,
+    products,
+    isLoadingProducts,
+    isLoadingPostProduct,
     isLoadingRooms,
+    isLoadingPostRoom,
     actions: {
+      postRoom,
       deleteRoom,
+      postProduct,
     },
   } = Admin.Hook.WorkerOffice.use()
   const navigate = useNavigate()
@@ -98,50 +107,85 @@ export const Main = () => {
       if (result.isConfirmed) deleteRoom(roomId)
     })
   }
-
+  const [isActiveRoomModal, setIsActiveRoomModal] = React.useState(false)
+  const [isActiveProductModal, setIsActiveProductModal] = React.useState(false)
   if (!adminId) return <NoAccess isAdmin={true} />
 
-  if (!workers) return <Loader isWhite={true} />
+  if (!workers) return <Loader isWhite={false} />
 
   return (
-    <div className={cls.root}>
-      <div className={cls.container}>
-        <div className={cls.header}><h1>Отчеты работников</h1> <AdminBtn onClick={goToSignUp}> + Добавить работника</AdminBtn></div>
-        <div className={cls.workersContainer}>
+    <>
+      <div className={cls.root}>
+        <div className={cls.container}>
+
+          <div className={cls.header}><h1>Отчеты работников</h1> <AdminBtn onClick={goToSignUp}> + Добавить работника</AdminBtn></div>
+          <div className={cls.workersContainer}>
+            {
+              workers.map(worker => (
+                <WorkersCard
+                  key={worker.key}
+                  worker={worker}
+                  deleteWorker={deleteWorker}
+                  checkReport={checkReport}
+                  deleteReport={deleteReport}
+                />
+              ))
+            }
+          </div>
+
+          <div className={cls.header}><h1>Комнаты</h1> <AdminBtn onClick={() => setIsActiveRoomModal(true)}> + Добавить комнату</AdminBtn></div>
           {
-            workers.map(worker => (
-              <WorkersCard
-                key={worker.key}
-                worker={worker}
-                deleteWorker={deleteWorker}
-                checkReport={checkReport}
-                deleteReport={deleteReport}
-              />
-            ))
+            isLoadingRooms ? <Loader isWhite={false}/> :
+              <div className={cls.roomContainer}>
+                {
+                  rooms?.map(({ roomImage, key, personCount }, index) => (
+                    <RoomCards
+                      key={key}
+                      index={index + 1}
+                      roomImage={roomImage}
+                      personCount={personCount}
+                    >
+                      <AdminBtn isDelete={true} onClick={() => onDelete(key)}>Удалить</AdminBtn>
+
+                    </RoomCards>
+                  ))
+                }
+              </div>
+          }
+
+          <div className={cls.header}><h1>Продукты</h1> <AdminBtn onClick={() => setIsActiveProductModal(true)}> + Добавить продукт</AdminBtn></div>
+          {
+            isLoadingProducts ? <Loader isWhite={false}/> :
+              <div className={cls.productsContainer}>
+                {
+                  products?.map(product => (
+                    <ProductCards key={product.key} product={product}/>
+                  ))
+                }
+              </div>
           }
         </div>
-        <h2>Комнаты</h2>
-        {
-          isLoadingRooms ? <Loader/> :
-            <div className={cls.roomContainer}>
-              {
-                rooms?.map(({ roomImage, isActive, key, order, personCount }, index) => (
-                  <RoomCards
-                    key={key}
-                    index={index + 1}
-                    roomImage={roomImage}
-                    personCount={personCount}
-                  >
-                    <button onClick={() => onDelete(key)}>Удалить</button>
-                  </RoomCards>
-                ))
-              }
-            </div>
-
-        }
 
       </div>
+      {
+        isActiveRoomModal &&
+        <AddRoomModal
+          isLoading={isLoadingPostRoom}
+          postRoom={postRoom}
+          isActive={isActiveRoomModal}
+          setIsActive={setIsActiveRoomModal}
+        />
+      }
+      {
+        isActiveProductModal &&
+        <AddProductModal
+          isLoading={isLoadingPostProduct}
+          isActive={isActiveProductModal}
+          postProduct={postProduct}
+          setIsActive={setIsActiveProductModal}
+        />
+      }
 
-    </div>
+    </>
   )
 }

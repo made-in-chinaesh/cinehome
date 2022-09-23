@@ -52,6 +52,7 @@ export const AddProductModal = ({
   return (
     <div className={cls.root}>
       <VscChromeClose onClick={() => setIsActive(false)} />
+      <div className={cls.modalOverlay} onClick={() => setIsActive(false)} />
       <div
         className={cls.container}
         data-aos="fade-up"
