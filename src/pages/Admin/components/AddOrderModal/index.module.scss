@@ -8,6 +8,11 @@
   top: 0;
   left: 0;
   overflow: auto;
+
+  .bookedText {
+    color: #ff0000;
+  }
+
   svg {
     position: fixed;
     top: 20px;

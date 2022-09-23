@@ -1,6 +1,9 @@
 .root {
   display: flex;
   flex-direction: column;
+  .bookedText {
+    color: red;
+  }
   img {
     width: 100%;
     height: 200px;

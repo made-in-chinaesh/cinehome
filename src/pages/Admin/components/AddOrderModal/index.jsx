@@ -101,8 +101,14 @@ export const AddOrderModal = ({
       })
     }
 
+    const check = newProducts.reduce((prev, product) => {
+      return prev + (product.price * product.count)
+    })
+
+
     const body = {
       ...data,
+      check,
       isActive: true,
       order: newProducts,
     }
@@ -178,7 +184,7 @@ export const AddOrderModal = ({
                   index={index + 1}
                   roomImage={roomImage}
                 >
-                  <p>{selectedRoom === key ? 'Выбрано' : 'Выбрать'} {isActive && 'забронировано'}</p>
+                  <p className={cls.bookedText}>{isActive && 'забронировано'}</p>
                 </RoomCards>
               </div>
             ))

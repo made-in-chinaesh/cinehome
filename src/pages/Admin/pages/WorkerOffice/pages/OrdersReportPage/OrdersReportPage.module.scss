@@ -5,8 +5,8 @@
 
   h1 {
     font-size: 25px;
-    font-weight: 400;
-    margin-bottom: 10px;
+    font-weight: 500;
+    margin: 20px;
   }
 
   .orders {
@@ -48,4 +48,14 @@
     height: 10px;
     background: #e1e9ee;
   }
+}
+
+.totalCheck {
+  text-align: right;
+  font-size: 24px;
+  background-color: #7a5acc;
+  border-radius: 20px;
+  padding: 10px;
+  color: #fff;
+  font-weight: 500;
 }

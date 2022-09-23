@@ -21,17 +21,18 @@ export const OrdersReportPage = ({
   const { id } = useParams()
 
   const newReports = reports?.find(item => item.key === id)
-
   return (
     <div className={cls.root}>
-      <h1>Заказ {id}</h1>
+      <h1>Заказ</h1>
       <div className={cls.orders}>
         {
 
-          newReports ? newReports.order.map(({ productImg, count, title, key }) => {
+          newReports ? newReports.order.map(({ productImg, count, title, key, totalPrice, price }) => {
             if (count > 0) {
               return <OrdersReportCards
                 key={key}
+                price={price}
+                totalPrice={totalPrice}
                 title={title}
                 count={count}
                 productImg={productImg}
@@ -40,6 +41,7 @@ export const OrdersReportPage = ({
             return
           }) : <OrdersReportSkeleton />
         }
+        <h2 className={cls.totalCheck}>Общая сумма закупок: {newReports?.check && newReports?.check}</h2>
       </div>
       <div className={cls.btnContainer}>
         <button onClick={() => deleteOrder(workerId, id)}>Удалить</button>

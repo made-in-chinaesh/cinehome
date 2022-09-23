@@ -16,12 +16,15 @@ export const OrdersReportCards = ({
   productImg,
   title,
   count,
+  price,
+  totalPrice,
 }) => {
   return (
     <div className={cls.root}>
       <img src={productImg} alt="#" />
       <h2>{title}</h2>
-      <p>Кол-во: {count}</p>
+      <p>Кол-во: {count} штук</p>
+      <p>{price} сом</p>
     </div>
   )
 }
