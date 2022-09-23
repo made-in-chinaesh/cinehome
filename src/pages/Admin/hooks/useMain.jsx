@@ -45,6 +45,25 @@ const useMain = () => {
       .then(() => getWorkers())
   }
 
+  const checkReport = (worker, orderId, getReports) => {
+    const request = Admin.API.checkReport(worker.key, orderId)
+
+    request
+      .then(res => {
+        console.log(res)
+        getReports(worker)
+      })
+  }
+
+  const deleteReport = (worker, orderId, getReports) => {
+    const request = Admin.API.deleteReport(worker.key, orderId)
+    request
+      .then(res => {
+        console.log(res)
+        getReports(worker)
+      })
+  }
+
   React.useEffect(() => {
     getAdmin()
     getWorkers()
@@ -57,6 +76,8 @@ const useMain = () => {
     actions: {
       getWorker,
       deleteWorker,
+      checkReport,
+      deleteReport,
     },
   }
 }

@@ -71,15 +71,15 @@ export const getReports = (workerId) => {
   return baseRequest.get(`/orders/${workerId}.json`)
 }
 
-export const checkReport = (id, reportKey) => {
+export const checkReport = (workerId, reportKey) => {
   const body = {
     isChecked: true,
   }
-  return baseRequest.patch(`/workers/${id}/reports/${reportKey}.json`, body)
+  return baseRequest.patch(`/orders/${workerId}/${reportKey}.json`, body)
 }
 
-export const deleteReport = (id, reportKey) => {
-  return baseRequest.delete(`/workers/${id}/reports/${reportKey}.json`)
+export const deleteReport = (workerId, reportKey) => {
+  return baseRequest.delete(`/orders/${workerId}/${reportKey}.json`)
 }
 
 // orders =========================================================
@@ -90,4 +90,3 @@ export const deleteOrder = (workerId, orderId) => {
 export const postOrder = (workerId, body) => {
   return baseRequest.post(`/orders/${workerId}.json`, body)
 }
-

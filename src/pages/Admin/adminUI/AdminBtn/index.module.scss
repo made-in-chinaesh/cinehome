@@ -1,0 +1,29 @@
+.btn {
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  color: #fff;
+  background: #7a5acc;
+  border: none;
+  margin: 0 5px;
+  transition: all .1s ease;
+  cursor: pointer;
+  &:active {
+    background-color: #654aa7;
+  }
+}
+.deleteBtn {
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  color: #fff;
+  background: #ff0202;
+  border: none;
+  margin: 0 5px;
+  transition: all .1s ease;
+  cursor: pointer;
+
+  &:active {
+    background-color: #c22121;
+    }
+}

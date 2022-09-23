@@ -7,6 +7,7 @@
   top: 0;
   left: 0;
   display: flex;
+  z-index: 12;
   flex-direction: column;
 
   svg {
@@ -32,6 +33,7 @@
       align-items: center;
       padding: 15px;
       border: 1px solid gainsboro;
+      box-shadow: 0 0 20px rgb(0 0 0 / 10%);
       margin: 10px;
       border-radius: 10px;
       img {
@@ -48,21 +50,39 @@
     .reportsContainer {
       display: flex;
       flex-direction: column;
+      .emptyText {
+        width: 100%;
+        height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #7a5acc;
+        font-weight: bold;
+        font-style: italic;
+        
+      }
       .report {
         display: flex;
         flex-direction: column;
         margin: 10px;
-        div:nth-child(1) {
+        .reportBlock {
           display: flex;
-          align-items: center;
+          align-items: center !important;
           justify-content: space-between;
-          border: 1px solid gainsboro;
+          // border: 1px solid gainsboro;
           border-radius: 10px;
-          padding: 15px;
+          padding: 1rem;
+          box-shadow: 0 0 20px rgb(0 0 0 / 10%);
           h2 {
+            margin: 0;
             font-size: 18px;
             font-weight: 500;
           }
+        }
+        .btnContainer {
+          display: flex;
+          flex-direction: row;
         }
         .ordersContainer {
           padding: 15px;
@@ -71,6 +91,11 @@
         }
       }
       
+    }
+    .saveBtn {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
     }
   }
 }

@@ -5,6 +5,9 @@ import { Admin } from 'pages/Admin'
 import { Loader } from 'components/Loader'
 import { parseJSON } from 'helpers'
 import { ProductCards } from '../ProductCards'
+import AdminBtn from 'pages/Admin/adminUI/AdminBtn'
+import { CheckBox } from 'pages/Admin/adminUI/CheckBox'
+import Swal from 'sweetalert2'
 
 const WorkerHeader = ({
   worker,
@@ -27,7 +30,10 @@ const WorkerHeader = ({
 
 const ReportsList = ({
   report,
-
+  checkReport,
+  worker,
+  getReports,
+  deleteReport,
 }) => {
   if (!report) return
 
@@ -35,32 +41,58 @@ const ReportsList = ({
     date,
     personCount,
     order,
+    isChecked,
+    key,
   } = report
 
   const [isShow, setIsShow] = React.useState(false)
 
+  const onDelete = () => {
+    Swal.fire({
+      title: 'Вы действительно хотите удалить?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      cancelButtonText: 'Отменить',
+      confirmButtonText: 'Удалить',
+    }).then((result) => {
+      if (result.isConfirmed) deleteReport(worker, key, getReports)
+    })
+  }
+
+
   return (
     <div
+      style={isChecked ? { backgroundColor: 'rgba(0, 128, 0, 0.81)' } : null}
       className={cls.report}
     >
-      <div>
+      <div className={cls.reportBlock}>
+        <CheckBox isChecked={isChecked} onClick={() => checkReport(worker, key, getReports)}/>
         <h2>{date}</h2>
-        <h2>{personCount}</h2>
-        <button onClick={() => setIsShow(!isShow)}>{isShow ? 'Закрыть' : 'Показать'}</button>
+        <h2>количество посетителей: {personCount}</h2>
+        <div className={cls.btnContainer}>
+          <AdminBtn onClick={onDelete} isDelete={true}>Удалить</AdminBtn>
+          <AdminBtn onClick={() => setIsShow(!isShow)}>{isShow ? 'Закрыть' : 'Показать'}</AdminBtn>
+        </div>
       </div>
       {
         isShow &&
       <div className={cls.ordersContainer}>
         {
-          order.map(product => (
-            <ProductCards
-              key={product.key}
-              product={product}
-              isWorker={false}
-            >
-              <p>Выбранное кол-во: {product.count}</p>
-            </ProductCards>
-          ))
+          order.map(product => {
+            if (product.count > 0) {
+              return (
+                <ProductCards
+                  key={product.key}
+                  product={product}
+                  isWorker={false}
+                >
+                  <p>Выбранное кол-во: {product.count}</p>
+                </ProductCards>)
+            }
+            return
+          })
         }
       </div>
       }
@@ -71,24 +103,32 @@ const ReportsList = ({
 export const WorkerReportsModal = ({
   setIsActive,
   worker,
+  checkReport,
+  deleteReport,
 }) => {
   const [isLoading, setIsLoading] = React.useState(false)
   const [reports, setReports] = React.useState(null)
 
-
-  React.useEffect(() => {
+  const getReports = (worker) => {
     const request = Admin.API.getReports(worker.key)
     setIsLoading(true)
     request
       .then(res => {
         const data = parseJSON(res.data)
-        console.log(data)
         if (!data) return
+        const filteredData = data.filter(item => !item.isChecked)
+        if (!filteredData) return
 
-        setReports(data)
+        setReports(filteredData)
       })
       .finally(() => setIsLoading(false))
+  }
+
+
+  React.useEffect(() => {
+    getReports(worker)
   }, [])
+
 
   if (!worker) return
   return (
@@ -98,17 +138,28 @@ export const WorkerReportsModal = ({
         <WorkerHeader
           worker={worker}
         />
-        <div className={cls.reportsContainer}>
-          {
-            isLoading ? <Loader /> :
-              reports?.map(report => (
-                <ReportsList
-                  key={report.key}
-                  report={report}
-                />
-              ))
-          }
-        </div>
+        {
+          isLoading ? <Loader isFullPage={true}/> :
+            <div className={cls.reportsContainer}>
+              {
+                !reports?.length ? <div className={cls.emptyText}><h1>Список данного работника пуст!</h1></div> :
+                  reports?.map(report => (
+                    <ReportsList
+                      worker={worker}
+                      key={report.key}
+                      report={report}
+                      checkReport={checkReport}
+                      getReports={getReports}
+                      deleteReport={deleteReport}
+                    />
+                  ))
+              }
+              {
+
+              }
+            </div>
+        }
+
       </div>
     </div>
   )
