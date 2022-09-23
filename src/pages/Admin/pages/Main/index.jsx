@@ -92,7 +92,7 @@ export const Main = () => {
   const navigate = useNavigate()
   const goToSignUp = () => navigate('/admin/auth/registerworker')
 
-  const adminId = localStorage.getItem('admin')
+  const adminId = sessionStorage.getItem('admin')
 
   const onDelete = (roomId) => {
     Swal.fire({
@@ -115,7 +115,7 @@ export const Main = () => {
   const [isActiveProductModal, setIsActiveProductModal] = React.useState(false)
   if (!adminId) return <NoAccess isAdmin={true} />
 
-  if (!workers) return <Loader isWhite={false} />
+  if (!workers) return <Loader />
 
   return (
     <>
@@ -159,7 +159,6 @@ export const Main = () => {
                       personCount={personCount}
                     >
                       <AdminBtn isDelete={true} onClick={() => onDelete(key)}>Удалить</AdminBtn>
-
                     </RoomCards>
                   ))
                 }

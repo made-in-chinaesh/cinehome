@@ -9,7 +9,7 @@ import { RoomCardsPage } from './pages/RoomCardsPage'
 import { NoAccess } from 'components/NoAccess'
 
 export const WorkerOffice = () => {
-  const authorizedWorkerId = localStorage.getItem('workerId')
+  const authorizedWorkerId = sessionStorage.getItem('workerId')
 
   const { workerId } = useParams()
 

@@ -139,7 +139,10 @@ export const WorkerReportsModal = ({
           worker={worker}
         />
         {
-          isLoading ? <Loader isFullPage={true}/> :
+          isLoading ? <Loader
+            isFullPage={true}
+            isWhite={false}
+          /> :
             <div className={cls.reportsContainer}>
               {
                 !reports?.length ? <div className={cls.emptyText}><h1>Список данного работника пуст!</h1></div> :
