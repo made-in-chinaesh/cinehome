@@ -107,6 +107,10 @@ export const Main = () => {
       if (result.isConfirmed) deleteRoom(roomId)
     })
   }
+  const signOut = () => {
+    sessionStorage.removeItem('admin')
+    navigate('admin/auth/signin')
+  }
   const [isActiveRoomModal, setIsActiveRoomModal] = React.useState(false)
   const [isActiveProductModal, setIsActiveProductModal] = React.useState(false)
   if (!adminId) return <NoAccess isAdmin={true} />
@@ -116,9 +120,18 @@ export const Main = () => {
   return (
     <>
       <div className={cls.root}>
+        <nav>
+          <ul>
+            <li><a href="#workers">Работники</a></li>
+            <li><a href="#rooms">Комнаты</a></li>
+            <li><a href="#products">Продукты</a></li>
+          </ul>
+
+          <AdminBtn signOut={signOut} isDelete={true}>Выйти из аккаунта</AdminBtn>
+        </nav>
         <div className={cls.container}>
 
-          <div className={cls.header}><h1>Отчеты работников</h1> <AdminBtn onClick={goToSignUp}> + Добавить работника</AdminBtn></div>
+          <div id="workers" className={cls.header}><h1>Работники</h1> <AdminBtn onClick={goToSignUp}> + Добавить работника</AdminBtn></div>
           <div className={cls.workersContainer}>
             {
               workers.map(worker => (
@@ -133,7 +146,7 @@ export const Main = () => {
             }
           </div>
 
-          <div className={cls.header}><h1>Комнаты</h1> <AdminBtn onClick={() => setIsActiveRoomModal(true)}> + Добавить комнату</AdminBtn></div>
+          <div id="rooms" className={cls.header}><h1>Комнаты</h1> <AdminBtn onClick={() => setIsActiveRoomModal(true)}> + Добавить комнату</AdminBtn></div>
           {
             isLoadingRooms ? <Loader isWhite={false}/> :
               <div className={cls.roomContainer}>
@@ -153,7 +166,7 @@ export const Main = () => {
               </div>
           }
 
-          <div className={cls.header}><h1>Продукты</h1> <AdminBtn onClick={() => setIsActiveProductModal(true)}> + Добавить продукт</AdminBtn></div>
+          <div id="products" className={cls.header}><h1>Продукты</h1> <AdminBtn onClick={() => setIsActiveProductModal(true)}> + Добавить продукт</AdminBtn></div>
           {
             isLoadingProducts ? <Loader isWhite={false}/> :
               <div className={cls.productsContainer}>
