@@ -103,12 +103,11 @@ export const AddOrderModal = ({
 
     const check = newProducts.reduce((prev, product) => {
       return prev + (product.price * product.count)
-    })
-
+    }, 0)
 
     const body = {
       ...data,
-      check,
+      check: check,
       isActive: true,
       order: newProducts,
     }
