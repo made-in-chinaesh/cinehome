@@ -9,9 +9,11 @@ const useWorkerOffice = () => {
 
   const [products, setProducts] = React.useState(null)
   const [rooms, setRooms] = React.useState(null)
+  const [reports, setReports] = React.useState(null)
 
   const [isLoadingProducts, setIsLoadingProducts] = React.useState(false)
   const [isLoadingRooms, setIsLoadingRooms] = React.useState(false)
+  const [isLoadingReports, setIsLoadingReports] = React.useState(false)
   const [isLoadingDeleteProduct, setIsLoadingDeleteProduct] = React.useState(false)
   const [isLoadingPostProduct, setIsLoadingPostProduct] = React.useState(false)
   const [isLoadingEditProduct, setIsLoadingEditProduct] = React.useState(false)
@@ -98,6 +100,21 @@ const useWorkerOffice = () => {
       .finally(() => setIsLoadingDeleteProduct(false))
   }
 
+  const getReports = (workerId) => {
+    const request = Admin.API.getReports(workerId)
+
+    setIsLoadingReports(true)
+    request
+      .then(res => {
+        const data = parseJSON(res.data)
+
+        if (!data) return
+
+        setReports(data)
+      })
+      .finally(() => setIsLoadingReports(false))
+  }
+
   const deleteOrder = (workerId, orderId) => {
     const request = Admin.API.deleteOrder(workerId, orderId)
 
@@ -111,6 +128,7 @@ const useWorkerOffice = () => {
           timer: 1500,
         })
         navigate(-1)
+        getReports()
       })
   }
 
@@ -148,6 +166,25 @@ const useWorkerOffice = () => {
       })
   }
 
+  const completeRoomOrder = (roomId) => {
+    const body = {
+      isActive: false,
+    }
+
+    const request = Admin.API.completeRoomOrder(roomId, body)
+
+    request
+      .then(() => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Успешно завершено!',
+          timer: 1500,
+        })
+        getRooms()
+      })
+  }
+
   React.useEffect(() => {
     getProducts()
     getRooms()
@@ -156,8 +193,10 @@ const useWorkerOffice = () => {
   return {
     products,
     rooms,
+    reports,
     isLoadingProducts,
     isLoadingRooms,
+    isLoadingReports,
     isLoadingDeleteProduct,
     isLoadingPostProduct,
     isLoadingEditProduct,
@@ -165,10 +204,13 @@ const useWorkerOffice = () => {
     actions: {
       deleteProduct,
       postProduct,
+      getReports,
       editProduct,
       deleteOrder,
       deleteRoom,
       postRoom,
+      getRooms,
+      completeRoomOrder,
     },
   }
 }

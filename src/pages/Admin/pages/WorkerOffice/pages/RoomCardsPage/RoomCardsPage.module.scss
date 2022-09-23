@@ -1,5 +1,4 @@
 .root {
-  padding: 20px;
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -12,9 +11,33 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
+    overflow: auto;
+    padding: 20px;
+  }
+  .btnContainer {
+    margin-top: auto;
+    border-top: 1px solid gainsboro;
+    padding: 20px;
+    button {
+      width: 100%;
+      padding: 15px;
+      border-radius: 6px;
+      background: #7a5acc;
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      &:active {
+        background: #4800ff;
+      }
+    }
+  }
+  h1 {
+    margin: 0 20px;
+    margin-top: 20px;
+
   }
   button {
-    margin-top: auto;
     padding: 15px;
     border-radius: 6px;
     background: #7a5acc;

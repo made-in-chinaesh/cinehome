@@ -1,24 +1,39 @@
 import React from 'react'
+import { RoomOrderModal } from '../RoomOrderModal'
 import cls from './RoomCards.module.scss'
 
 export const RoomCards = ({
   roomImage,
   isActive,
   index,
+  order,
   children,
-<<<<<<< HEAD
-  onClick,
+  roomId,
+  completeRoomOrder,
+  personCount,
 }) => {
+  const [isActiveRoomOrderModal, setIsActiveRoomOrderModal] = React.useState(false)
+
   return (
-    <div className={cls.root} onClick={onClick}>
-=======
-}) => {
-  return (
-    <div className={cls.root}>
->>>>>>> 413fe14 (last)
-      <img src={roomImage} alt="#" />
-      <p>Комната {index} {isActive && '(занято)'}</p>
-      {children}
-    </div>
+    <>
+      <div className={cls.root}>
+        <img
+          src={roomImage} alt="#"
+          onClick={() => isActive ? setIsActiveRoomOrderModal(true) : null}
+        />
+        <p>Комната {index} {isActive && '(забронировано)'}</p>
+        {children}
+      </div>
+      {
+        isActiveRoomOrderModal &&
+        <RoomOrderModal
+          setIsActive={setIsActiveRoomOrderModal}
+          order={order}
+          roomId={roomId}
+          completeRoomOrder={completeRoomOrder}
+          personCount={personCount}
+        />
+      }
+    </>
   )
 }

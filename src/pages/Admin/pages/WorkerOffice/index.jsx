@@ -6,8 +6,11 @@ import { WorkerSidebar } from 'pages/Admin/components/WorkerSidebar'
 import { ProductCardsPage } from './pages/ProductCardsPage'
 import { OrdersReportPage } from './pages/OrdersReportPage'
 import { RoomCardsPage } from './pages/RoomCardsPage'
+import { NoAccess } from 'components/NoAccess'
 
 export const WorkerOffice = () => {
+  const authorizedWorkerId = localStorage.getItem('workerId')
+
   const { workerId } = useParams()
 
   const {
@@ -20,24 +23,32 @@ export const WorkerOffice = () => {
   const {
     products,
     rooms,
+    reports,
     isLoadingProducts,
     isLoadingRooms,
+    isLoadingReports,
     isLoadingPostProduct,
     isLoadingEditProduct,
     isLoadingPostRoom,
     actions: {
       deleteProduct,
       postProduct,
+      getReports,
       editProduct,
       deleteOrder,
       deleteRoom,
       postRoom,
+      getRooms,
+      completeRoomOrder,
     },
   } = Admin.Hook.WorkerOffice.use()
 
   React.useEffect(() => {
     getWorker(workerId)
+    getReports(workerId)
   }, [])
+
+  if (!authorizedWorkerId) return <NoAccess isAdmin={true} />
 
   return (
     <>
@@ -47,6 +58,10 @@ export const WorkerOffice = () => {
           worker={worker}
           products={products}
           rooms={rooms}
+          getRooms={getRooms}
+          reports={reports}
+          isLoadingReports={isLoadingReports}
+          getReports={getReports}
         />
         <div className={cls.container}>
           <Routes>
@@ -73,6 +88,7 @@ export const WorkerOffice = () => {
                   deleteOrder={deleteOrder}
                   workerId={workerId}
                   getWorker={getWorker}
+                  reports={reports}
                 />
               }
             />
@@ -85,6 +101,7 @@ export const WorkerOffice = () => {
                   isLoadingPostRoom={isLoadingPostRoom}
                   deleteRoom={deleteRoom}
                   postRoom={postRoom}
+                  completeRoomOrder={completeRoomOrder}
                 />
               }
             />

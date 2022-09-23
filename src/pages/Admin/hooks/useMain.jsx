@@ -1,5 +1,5 @@
-import { parseJSON } from 'helpers'
 import React from 'react'
+import { parseJSON } from 'helpers'
 import { Admin } from '..'
 
 const useMain = () => {
@@ -38,6 +38,13 @@ const useMain = () => {
       })
   }
 
+  const deleteWorker = (workerId) => {
+    const request = Admin.API.deleteWorker(workerId)
+
+    request
+      .then(() => getWorkers())
+  }
+
   React.useEffect(() => {
     getAdmin()
     getWorkers()
@@ -49,6 +56,7 @@ const useMain = () => {
     worker,
     actions: {
       getWorker,
+      deleteWorker,
     },
   }
 }

@@ -33,8 +33,8 @@ export const ProductCardsPage = ({
   return (
     <>
       <div className={cls.root}>
-        <h1>Продукты</h1>
-        <div>
+        <div className={cls.container}>
+          <h1>Продукты</h1>
           {
             products?.map(product => (
               <ProductCards
@@ -47,10 +47,9 @@ export const ProductCardsPage = ({
             ))
           }
         </div>
-        <button
-          className={cls.addProductBtn}
-          onClick={() => setIsActiveAddProductModal(true)}
-        >Добавить продукт</button>
+        <div className={cls.btnContainer}>
+          <button onClick={() => setIsActiveAddProductModal(true)}>Добавить продукт</button>
+        </div>
       </div>
       {
         isActiveAddProductModal &&

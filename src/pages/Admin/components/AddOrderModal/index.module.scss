@@ -1,119 +1,93 @@
 .root {
+  width: 100%;
+  height: 100%;
+  background: #efefef;
+  display: flex;
+  flex-direction: column;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba($color: #000, $alpha: .5);
-  display: flex;
-  flex-direction: column;
-  z-index: 12123;
-  .modalOverlay {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
+  overflow: auto;
+  svg {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
   }
-
-  .content {
-    position: relative;
-    width: 90%;
-    padding: 20px;
-    aspect-ratio: 3 / 1.4;
-    background-color: #fff;
-    z-index: 10;
-    overflow: hidden;
-
-    .closeIcon {
-      position: absolute;
-      top: 0;
-      right: 0;
-      color: #000;
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 1300px;
+    margin: 0 auto;
+    height: auto;
+    background: #fff;
+    border-left: 1px solid gainsboro;
+    border-right: 1px solid gainsboro;
+    h1 {
+      font-size: 25px;
+      font-weight: 400;
+      margin: 0 20px;
+      margin-top: 10px;
     }
-
-    .roomContainer {
+    h2 {
+      font-size: 20px;
+      font-weight: 400;
+      margin: 10px 20px;
+    }
+    .formContainer {
+      padding: 20px;
+    }
+    .productsContainer {
+      padding: 20px;
+      height: 50vh;
+      overflow: auto;
+      border-bottom: 1px solid gainsboro;
+    }
+    .roomsContainer {
+      padding: 20px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       grid-gap: 20px;
-      transition: margin 0.5s ease-out;
-    }
-    .upRoomContainer {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-gap: 20px;
-      margin-top: -100vh !important;
-      transition: margin 0.5s ease-out;
-    }
-    .orderContainer {
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: red;
-      form {
-        display: flex;
-        justify-content: center;
-    
-        label {
-          padding: 1px;
-          color: #fff;
-          margin: 10px 20px;
-    
-          span {
-            margin: 10px 0;
-            font-size: 20px;
-          }
-    
-          input {
-            border-radius: 20px;
-            border: none;
-            color: #fff;
-            background-color: #7a5accb6;
-            margin: 10px 0;
-            font-size: 20px;
-            padding: .5rem;
-          }
-    
-          #count {
-            width: 70px;
-          }
-        }
-      
-        }
-      .categoryes {
-        width: 100%;
+      button {
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 16px;
         color: #fff;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        margin: 20px 0;
-        background-color: rgba(0, 0, 0, 0.721);
-
-        .category {
-          padding: 1rem 0;
-          text-align: center;
-          transition: all .3s ease-in;
-          cursor: pointer;
+        background: #7a5acc;
+        border: none;
+        cursor: pointer;
+        &:active {
+          background: blue;
         }
-
-        .activeCategory {
-          -moz-box-shadow: inset 0 -15px 15px -15px #fff;
-          -webkit-box-shadow: inset 0 -15px 15px -15px #fff;
-          box-shadow: inset 0 -15px 15px -15px #fff;
-          border-bottom: 3px solid #fff;
-          text-align: center;
-          padding: 1rem 0;
-        }
-      }
-      .productsContainer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        width: 100%;
-        gap: 20px;
       }
     }
+    .startBtn {
+      margin: 20px;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 18px;
+      color: #fff;
+      background: #7a5acc;
+      border: none;
+      cursor: pointer;
+      &:active {
+        background: blue;
+      }
+    }
+  }
+}
+
+.productNavigation {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 20px;
+  h2 {
+    padding: 15px;
+    border-bottom: 2px solid #efefef;
+    text-align: center;
+    margin: 0 !important;
+    cursor: pointer;
   }
 }

@@ -19,6 +19,8 @@ export const ProductCards = ({
   isLoadingEditProduct,
   editProduct,
   deleteProduct,
+  isWorker = true,
+  children,
 }) => {
   if (!product) return
 
@@ -52,8 +54,14 @@ export const ProductCards = ({
         <h2>{title}</h2>
         <div>
           <p>Стоимость: {price} сом</p>
-          <button onClick={() => setIsActiveEditProductModal(true)}>Изменить</button>
-          <button onClick={() => onDelete()}>Удалить</button>
+          {
+            isWorker &&
+            <div>
+              <button onClick={() => setIsActiveEditProductModal(true)}>Изменить</button>
+              <button onClick={() => onDelete()}>Удалить</button>
+            </div>
+          }
+          {children}
         </div>
       </div>
       {

@@ -4,9 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { Admin } from '..'
 
 const useRoom = (roomId) => {
-  const [rooms, setRooms] = React.useState(null)
-  const [singleRoom, setSingleRoom] = React.useState(null)
-  const [isLoading, setIsLoading] = React.useState(false)
   const [products, setProducts] = React.useState(null)
   const [filteredProduct, setFilteredProduct] = React.useState(null)
   const [roomOrders, setRoomOrders] = React.useState(null)
@@ -31,22 +28,6 @@ const useRoom = (roomId) => {
       original_title: 'hookah',
     },
   ]
-
-  const getRooms = () => {
-    const request = Admin.API.getRooms()
-
-    setIsLoading(true)
-
-    request
-      .then(res => {
-        const data = parseJSON(res.data)
-
-        if (!data) return
-
-        setRooms(data)
-      })
-      .finally(() => setIsLoading(false))
-  }
 
   const bookRoom = () => {
     const body = { isActive: true }
@@ -73,41 +54,6 @@ const useRoom = (roomId) => {
       })
   }
 
-  const increment = (e, key) => {
-    e.preventDefault()
-    const updateProducts = products.map(item => {
-      return item.map(product => {
-        if (product.key === key) {
-          return {
-            ...product,
-            count: ++product.count,
-            totalPrice: product.count * product.price,
-          }
-        }
-        return product
-      })
-    })
-
-    setProducts(updateProducts)
-  }
-  const decrement = (e, key) => {
-    e.preventDefault()
-
-    const updateProducts = products.map(item => {
-      return item.map(product => {
-        if (product.key === key && product.count > 0) {
-          return {
-            ...product,
-            count: product.count -= 1,
-            totalPrice: product.totalPrice -= product.price,
-          }
-        }
-        return product
-      })
-    })
-
-    setProducts(updateProducts)
-  }
 
   const handleCategory = (type) => {
     switch (type) {

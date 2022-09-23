@@ -1,8 +1,8 @@
 import React from 'react'
 import cls from './WorkerSidebar.module.scss'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { parseJSON } from 'helpers'
 import { AddOrderModal } from '../AddOrderModal'
+import Swal from 'sweetalert2'
 
 const WorkerHeaderSkeleton = () => {
   return (
@@ -35,6 +35,10 @@ export const WorkerSidebar = ({
   worker,
   products,
   rooms,
+  getRooms,
+  reports,
+  isLoadingReports,
+  getReports,
 }) => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -53,11 +57,26 @@ export const WorkerSidebar = ({
     },
   ]
 
+  const logout = () => {
+    Swal.fire({
+      title: 'Вы действительно хотите выйти из аккаунта?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Отменить',
+      confirmButtonText: 'Выйти',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('workerId')
+        navigate('/admin/auth/signin')
+      }
+    })
+  }
+
   const reportIdShorter = (key) => {
     return location.pathname.substring(location.pathname.length - key.length)
   }
-
-  const reports = parseJSON(worker?.reports)
 
   return (
     <>
@@ -67,6 +86,7 @@ export const WorkerSidebar = ({
             <div className={cls.header}>
               <img src={worker.photoUrl} alt="#" />
               <p>{worker.firstName} {worker.lastName}</p>
+              <button onClick={() => logout()}>Выйти</button>
             </div> :
             <WorkerHeaderSkeleton />
         }
@@ -93,7 +113,7 @@ export const WorkerSidebar = ({
           <h1>{!reports?.length ? 'Ваш список пуст' : 'Ваши отчеты'}</h1>
           <div className={cls.reports}>
             {
-              worker ? reports?.map(({ check, date, key }) => (
+              !isLoadingReports ? reports?.map(({ personCount, date, key }) => (
                 <div
                   key={key}
                   onClick={() => navigate(`/admin/worker/${workerId}/report/${key}`)}
@@ -105,7 +125,7 @@ export const WorkerSidebar = ({
                       } : null
                   }
                 >
-                  <h2>Чек: {check}</h2>
+                  <h2>Кол-во персон: {personCount}</h2>
                   <p>{date}</p>
                 </div>
               )) : <ReportCardsSkeleton />
@@ -123,7 +143,11 @@ export const WorkerSidebar = ({
           products={products}
           rooms={rooms}
           isActive={isActiveOrderModal}
-          setIsActive={setIsActiveOrderModal} />
+          setIsActive={setIsActiveOrderModal}
+          getRooms={getRooms}
+          workerId={workerId}
+          getReports={getReports}
+        />
       }
     </>
   )

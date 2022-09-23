@@ -4,6 +4,7 @@ import * as Main from './useMain'
 import * as FileReader from './useFileReader'
 import * as RegisterWorker from './useRegisterWorker'
 import * as WorkerOffice from './useWorkerOffice'
+import * as Order from './useOrder'
 
 export const Hook = {
   Room,
@@ -12,4 +13,5 @@ export const Hook = {
   FileReader,
   RegisterWorker,
   WorkerOffice,
+  Order,
 }

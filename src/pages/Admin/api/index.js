@@ -16,6 +16,10 @@ export const getWorker = (id) => {
 export const postWorker = (id, body) => {
   return baseRequest.put(`/workers/${id}.json`, body)
 }
+
+export const deleteWorker = (workerId) => {
+  return baseRequest.delete(`/workers/${workerId}.json`)
+}
 // rooms ========================================
 export const getRooms = () => {
   return baseRequest.get('/rooms.json')
@@ -34,7 +38,11 @@ export const getSingleRoom = (roomId) => {
   return baseRequest.get(`/rooms/${roomId}.json`)
 }
 
-export const activateRoom = (roomId, body) => {
+export const bookingRoom = (roomId, body) => {
+  return baseRequest.patch(`/rooms/${roomId}.json`, body)
+}
+
+export const completeRoomOrder = (roomId, body) => {
   return baseRequest.patch(`/rooms/${roomId}.json`, body)
 }
 
@@ -60,7 +68,7 @@ export const postReports = (workerId, body) => {
 }
 
 export const getReports = (workerId) => {
-  return baseRequest.get(`/workers/${workerId}/reports.json`)
+  return baseRequest.get(`/orders/${workerId}.json`)
 }
 
 export const checkReport = (id, reportKey) => {
@@ -75,21 +83,11 @@ export const deleteReport = (id, reportKey) => {
 }
 
 // orders =========================================================
-export const patchOrder = (workerId, orderId, body) => {
-  return baseRequest.patch(`/workers/${workerId}/reports/${orderId}.json`, body)
-}
-
-export const getOldOrder = (workerId, orderId) => {
-  return baseRequest.get(`/workers/${workerId}/reports/${orderId}.json`)
-}
-
 export const deleteOrder = (workerId, orderId) => {
-  return baseRequest.delete(`/workers/${workerId}/reports/${orderId}.json`)
-<<<<<<< HEAD
+  return baseRequest.delete(`/orders/${workerId}/${orderId}.json`)
 }
 
-export const deletSingleRoom = (roomId) => {
-  return baseRequest.delete(`rooms/${roomId}.json`)
-=======
->>>>>>> 413fe14 (last)
+export const postOrder = (workerId, body) => {
+  return baseRequest.post(`/orders/${workerId}.json`, body)
 }
+

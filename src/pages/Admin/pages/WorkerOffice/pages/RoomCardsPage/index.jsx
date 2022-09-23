@@ -27,6 +27,7 @@ export const RoomCardsPage = ({
   isLoadingPostRoom,
   deleteRoom,
   postRoom,
+  completeRoomOrder,
 }) => {
   const [isActiveAddRoomModal, setIsActiveAddRoomModal] = React.useState(false)
 
@@ -53,19 +54,25 @@ export const RoomCardsPage = ({
         <h1>Комнаты</h1>
         <div className={cls.container}>
           {
-            rooms?.map(({ roomImage, isActive, key }, index) => (
+            rooms?.map(({ roomImage, isActive, key, order, personCount }, index) => (
               <RoomCards
                 key={key}
-                index={index}
+                index={index + 1}
                 roomImage={roomImage}
                 isActive={isActive}
+                order={order}
+                roomId={key}
+                completeRoomOrder={completeRoomOrder}
+                personCount={personCount}
               >
                 <button onClick={() => onDelete(key)}>Удалить</button>
               </RoomCards>
             ))
           }
         </div>
-        <button onClick={() => setIsActiveAddRoomModal(true)}>Добавить комнату</button>
+        <div className={cls.btnContainer}>
+          <button onClick={() => setIsActiveAddRoomModal(true)}>Добавить комнату</button>
+        </div>
       </div>
       {
         isActiveAddRoomModal &&

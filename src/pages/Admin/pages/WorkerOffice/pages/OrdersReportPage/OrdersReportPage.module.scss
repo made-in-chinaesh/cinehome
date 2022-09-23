@@ -2,7 +2,6 @@
   display: flex;
   height: 100%;
   flex-direction: column;
-  padding: 20px;
 
   h1 {
     font-size: 25px;
@@ -13,24 +12,30 @@
   .orders {
     width: 100%;
     height: 100%;
-    // height: 80vh;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    // overflow: auto;
+    overflow: auto;
   }
 
-  button {
+  .btnContainer {
+    width: 100%;
     margin-top: auto;
-    padding: 15px;
-    border-radius: 6px;
-    background: #7a5acc;
-    color: #fff;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
+    border-top: 1px solid gainsboro;
+    padding: 20px;
+    button {
+      width: 100%;
+      padding: 15px;
+      border-radius: 6px;
+      background: #7a5acc;
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
 
-    &:active {
-      background: #4800ff;
+      &:active {
+        background: #4800ff;
+      }
     }
   }
 }

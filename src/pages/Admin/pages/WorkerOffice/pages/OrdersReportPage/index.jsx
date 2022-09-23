@@ -15,28 +15,16 @@ const OrdersReportSkeleton = () => {
   )
 }
 export const OrdersReportPage = ({
-  worker,
   deleteOrder,
   workerId,
-  getWorker,
+  reports,
 }) => {
   const { id } = useParams()
 
-  if (!worker) return <OrdersReportSkeleton />
-
-  const orders = parseJSON(worker.reports).find(({ key }) => key === id).orders
+  const newReports = reports?.find(item => item.key === id)
 
   const onDeleteOrder = (workerId, id) => {
-    getWorker()
     deleteOrder(workerId, id)
-  }
-
-  if (!orders || !orders.length) {
-    return (
-      <div>
-        <h2>Vash spisok pust</h2>
-      </div>
-    )
   }
 
   return (
@@ -44,15 +32,21 @@ export const OrdersReportPage = ({
       <h1>Заказ {id}</h1>
       <div className={cls.orders}>
         {
-          orders.map(({ productImg, count, title, key }) => (
-            <OrdersReportCards
-              key={key}
-              title={title}
-              count={count}
-              productImg={productImg}
-            />
-          ))
+
+          newReports ? newReports.order.map(({ productImg, count, title, key }) => {
+            if (count > 0) {
+              return <OrdersReportCards
+                key={key}
+                title={title}
+                count={count}
+                productImg={productImg}
+              />
+            }
+            return
+          }) : <OrdersReportSkeleton />
         }
+      </div>
+      <div className={cls.btnContainer}>
         <button onClick={() => onDeleteOrder(workerId, id)}>Удалить</button>
       </div>
     </div>

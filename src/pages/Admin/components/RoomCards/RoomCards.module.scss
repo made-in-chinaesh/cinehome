@@ -8,13 +8,9 @@
     border-radius: 10px;
     transition: 200ms;
     cursor: pointer;
-    z-index: 10;
     &:hover {
-<<<<<<< HEAD
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.711);
-=======
       box-shadow: 0 0 10px #000;
->>>>>>> 413fe14 (last)
     }
   }
   p {
