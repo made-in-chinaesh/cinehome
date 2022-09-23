@@ -106,10 +106,8 @@ export const AddOrderModal = ({
       isActive: true,
       order: newProducts,
     }
-
-    setIsActive(false)
     navigate('rooms')
-    return bookingRoom(workerId, selectedRoom, body, getRooms, getReports)
+    return bookingRoom(workerId, selectedRoom, body, getRooms, getReports, setIsActive)
   }
 
   return (

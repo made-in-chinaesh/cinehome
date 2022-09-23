@@ -2,7 +2,6 @@ import React from 'react'
 import cls from './OrdersReportPage.module.scss'
 import { OrdersReportCards, OrdersReportCardsSkeleton } from 'pages/Admin/components/OrdersReportCards'
 import { useParams } from 'react-router-dom'
-import { parseJSON } from 'helpers'
 
 const OrdersReportSkeleton = () => {
   return (
@@ -22,10 +21,6 @@ export const OrdersReportPage = ({
   const { id } = useParams()
 
   const newReports = reports?.find(item => item.key === id)
-
-  const onDeleteOrder = (workerId, id) => {
-    deleteOrder(workerId, id)
-  }
 
   return (
     <div className={cls.root}>
@@ -47,7 +42,7 @@ export const OrdersReportPage = ({
         }
       </div>
       <div className={cls.btnContainer}>
-        <button onClick={() => onDeleteOrder(workerId, id)}>Удалить</button>
+        <button onClick={() => deleteOrder(workerId, id)}>Удалить</button>
       </div>
     </div>
   )

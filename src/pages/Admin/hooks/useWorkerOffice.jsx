@@ -127,8 +127,8 @@ const useWorkerOffice = () => {
           showConfirmButton: false,
           timer: 1500,
         })
-        navigate(-1)
-        getReports()
+        getReports(workerId)
+        navigate(`/admin/worker/${workerId}/`)
       })
   }
 

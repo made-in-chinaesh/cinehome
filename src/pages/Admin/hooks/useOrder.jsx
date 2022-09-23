@@ -31,22 +31,29 @@ const useOrder = () => {
     setProducts(newProducts)
   }
 
-  const postOrder = (workerId, body) => Admin.API.postOrder(workerId, body)
+  const postOrder = (workerId, body, getRooms, getReports) => {
+    const request = Admin.API.postOrder(workerId, body)
 
-  const bookingRoom = (workerId, roomId, body, getRooms, getReports) => {
+    request
+      .then(() => {
+        getReports(workerId)
+        getRooms()
+      })
+  }
+
+  const bookingRoom = (workerId, roomId, body, getRooms, getReports, setIsActive) => {
     const request = Admin.API.bookingRoom(roomId, body)
 
     setIsLoadingBookingRoom(true)
     request
       .then(() => {
-        const postOrderBOdy = {
+        const postOrderBody = {
           order: body.order,
           personCount: body.personCount,
           date: new Date().toLocaleDateString(),
         }
-        postOrder(workerId, postOrderBOdy)
-        getReports(workerId)
-        getRooms()
+        postOrder(workerId, postOrderBody, getRooms, getReports)
+        setIsActive(false)
         Swal.fire({
           position: 'center',
           title: 'Успешно заброноровано!',
