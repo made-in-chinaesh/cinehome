@@ -2,6 +2,7 @@ import React from 'react'
 import cls from './OrdersReportPage.module.scss'
 import { OrdersReportCards, OrdersReportCardsSkeleton } from 'pages/Admin/components/OrdersReportCards'
 import { useParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const OrdersReportSkeleton = () => {
   return (
@@ -19,6 +20,20 @@ export const OrdersReportPage = ({
   reports,
 }) => {
   const { id } = useParams()
+
+  const onDelete = (workerId, id) => {
+    Swal.fire({
+      title: 'Вы действительно хотите удалить?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Отменить',
+      confirmButtonText: 'Удалить',
+    }).then((result) => {
+      if (result.isConfirmed) deleteOrder(workerId, id)
+    })
+  }
 
   const newReports = reports?.find(item => item.key === id)
   return (
@@ -44,7 +59,7 @@ export const OrdersReportPage = ({
         <h2 className={cls.totalCheck}>Общая сумма закупок: {newReports?.check && newReports?.check}</h2>
       </div>
       <div className={cls.btnContainer}>
-        <button onClick={() => deleteOrder(workerId, id)}>Удалить</button>
+        <button onClick={() => onDelete(workerId, id)}>Удалить</button>
       </div>
     </div>
   )
