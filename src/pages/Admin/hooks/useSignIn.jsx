@@ -30,7 +30,7 @@ const useSignIn = () => {
             showConfirmButton: false,
             timer: 1500,
           })
-          localStorage.setItem('admin', data.localId)
+          sessionStorage.setItem('admin', data.localId)
           return navigate('/admin')
         }
 

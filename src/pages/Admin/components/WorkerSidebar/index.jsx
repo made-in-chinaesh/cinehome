@@ -68,7 +68,7 @@ export const WorkerSidebar = ({
       confirmButtonText: 'Выйти',
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem('workerId')
+        sessionStorage.removeItem('workerId')
         navigate('/admin/auth/signin')
       }
     })
