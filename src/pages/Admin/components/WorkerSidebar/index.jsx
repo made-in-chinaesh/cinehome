@@ -131,6 +131,8 @@ export const WorkerSidebar = ({
               )) : <ReportCardsSkeleton />
             }
           </div>
+        </div>
+        <div className={cls.orderBtnContainer}>
           <button
             className={cls.orderBtn}
             onClick={() => setIsActiveOrderModal(true)}

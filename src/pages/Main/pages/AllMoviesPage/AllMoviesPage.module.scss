@@ -3,6 +3,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  padding-bottom: 50px;
   .header {
     width: 100%;
     display: flex;
@@ -22,7 +23,7 @@
       outline: none;
       transition: 200ms;
       background: none;
-      border: 1px solid rgb(18, 18, 18);
+      border: 1px solid #fff;
       color: #fff;
       option {
         background: #000;
@@ -63,15 +64,15 @@
     button {
       padding: 15px 50px;
       border-radius: 4px;
-      background: none;
-      border: 1px solid rgb(18, 18, 18);
+      background: #7a5acc;
       color: #fff;
       margin: 10px;
       font-size: 16px;
       transition: 200ms;
-      &:hover {
-        background: #fff;
-        color: #000;
+      border: none;
+      cursor: pointer;
+      &:active {
+        background: blue;
       }
     }
   }

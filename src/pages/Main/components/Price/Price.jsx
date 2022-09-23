@@ -49,10 +49,6 @@ export const Price = () => {
             <div
               className={cls.listItem}
               key={id}
-              data-aos="fade-left"
-              data-aos-duration="700"
-              data-aos-delay={200 + (id * 100)}
-              data-oas-once={true}
             >
               {icon}
               <div className={cls.listContent}>
@@ -61,75 +57,6 @@ export const Price = () => {
             </div>
           ))
         }
-
-        {/*
-        <div
-          data-aos="fade-left"
-          data-aos-offset="100"
-          data-aos-duration="500"
-          className={cls.listItem}>
-          <RiHeartsLine />
-          <div
-            className={cls.listContent}>
-            Весь кинозал только в Вашем распоряжении
-          </div>
-        </div>
-
-        <div
-          data-aos="fade-left"
-          data-aos-offset="100"
-          data-aos-duration="500"
-          className={cls.listItem}>
-          <IoIosBed />
-          <div className={cls.listContent}>
-            Огромные Лежачие диваны
-          </div>
-        </div>
-
-        <div
-          data-aos="fade-left"
-          data-aos-offset="100"
-          data-aos-duration="500"
-          className={cls.listItem}>
-          <GiCctvCamera />
-          <div className={cls.listContent}>
-            Отсутствие камер в зонах комфорта
-          </div>
-        </div>
-
-        <div
-          data-aos="fade-left"
-          data-aos-offset="100"
-          data-aos-duration="500"
-          className={cls.listItem}>
-          <GiUsbKey />
-          <div className={cls.listContent}>
-            Можно со своими фильмами
-          </div>
-        </div>
-
-        <div
-          data-aos="fade-left"
-          data-aos-offset="100"
-          data-aos-duration="500"
-          className={cls.listItem}>
-          <GiVacuumCleaner />
-          <div className={cls.listContent}>
-            Уборка перед каждым сеансом
-          </div>
-        </div>
-
-        <div
-          data-aos="fade-left"
-          data-aos-offset="100"
-          data-aos-duration="500"
-          className={cls.listItem}>
-          <GiSelfLove />
-          <div className={cls.listContent}>
-            8 из 10 гостей приходят к нам повторно
-          </div>
-        </div> */}
-
       </div>
     </div>
   )

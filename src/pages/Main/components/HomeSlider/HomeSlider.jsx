@@ -86,7 +86,7 @@ export const HomeSlider = () => {
                         <p>{shortedText(overview, 300)}</p>
 
                         <div className={cls.infoBtnContainer}>
-                          <button onClick={() => goToMoviePage(id)} className={cls.trailerBtn} >Watch info</button>
+                          <button onClick={() => goToMoviePage(id)} className={cls.trailerBtn} >Посмотреть</button>
                         </div>
                       </div>
 

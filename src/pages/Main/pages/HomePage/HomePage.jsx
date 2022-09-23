@@ -41,7 +41,7 @@ export const HomePage = () => {
     <div className={cls.root}>
       <HomeSlider />
       <div className={cls.mouseContainer}>
-        <a href="#scroll" className={cls.mouseBtn} onClick={() => bottomScroll()}>
+        <a href="#scroll" className={cls.mouseBtn}>
           <span className={cls.mouseScroll}></span>
         </a>
       </div>
@@ -53,7 +53,6 @@ export const HomePage = () => {
             <div
               className={cls.card}
               key={id}
-              data-aos="fade-up"
             >
               <h4>{headerTitle}</h4>
               <h2>{price} сом</h2>

@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 20px;
+  padding-bottom: 80px;
   .card {
     transform-style: preserve-3d;
     transform: perspective(1000px);

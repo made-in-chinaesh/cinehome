@@ -3,7 +3,7 @@ import cls from './Loader.module.scss'
 
 export const Loader = ({
   isFullPage = false,
-  isWhite = false,
+  isWhite = true,
 }) => {
   const heightStyle = isFullPage ? { height: '80vh' } : { height: 150 }
 

@@ -55,15 +55,14 @@
             padding: 15px;
             font-size: 16px;
             color: #fff;
-            background: #000;
+            background: #7a5acc;
             border-radius: 30px;
             outline: none;
             border: none;
             cursor: pointer;
             transition: 300ms;
-            &:hover {
-              background: #fff;
-              color: #000;
+            &:active {
+              background: blue;
             }
           }
           :nth-child(1) {

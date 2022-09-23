@@ -51,12 +51,13 @@ const useOrder = () => {
           order: body.order,
           personCount: body.personCount,
           date: new Date().toLocaleDateString(),
+          isChecked: false,
         }
         postOrder(workerId, postOrderBody, getRooms, getReports)
         setIsActive(false)
         Swal.fire({
           position: 'center',
-          title: 'Успешно заброноровано!',
+          title: 'Успешно забронировано!',
           icon: 'success',
           timer: 1000,
         })
