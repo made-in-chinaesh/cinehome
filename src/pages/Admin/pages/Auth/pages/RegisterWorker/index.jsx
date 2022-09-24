@@ -5,6 +5,8 @@ import { Input } from 'components/UI/Input'
 import { useForm } from 'react-hook-form'
 import { Forms } from 'helpers/Forms'
 import { Admin } from 'pages/Admin'
+import { auth } from 'configs'
+import Swal from 'sweetalert2'
 
 export const RegisterWorker = () => {
   const {
@@ -21,6 +23,10 @@ export const RegisterWorker = () => {
       postWorker,
     },
   } = Admin.Hook.RegisterWorker.use()
+
+  const {
+    workers,
+  } = Admin.Hook.Main.use()
 
   const {
     register,
@@ -60,6 +66,48 @@ export const RegisterWorker = () => {
             password: '',
             phoneNumber: '',
             photoUrl: '',
+          })
+        })
+        .catch((error) => {
+          const errorMessage = error.response.data.error.message
+
+          if (errorMessage === 'EMAIL_EXISTS') {
+            const request = auth(registerBody, true)
+
+            return request
+              .then(res => {
+                const localId = res.data.localId
+
+                if (!localId) return
+                const isWorker = workers?.find(({ key }) => key === localId)
+
+                if (isWorker) {
+                  return Swal.fire({
+                    title: 'Этот работник уже нанят',
+                    padding: '3em',
+                    color: '#716add',
+                    icon: 'error',
+                    timer: 1000,
+                  })
+                }
+                postWorker(localId, newData)
+                reset({
+                  firstName: '',
+                  lastName: '',
+                  email: '',
+                  password: '',
+                  phoneNumber: '',
+                  photoUrl: '',
+                })
+              })
+          }
+          return Swal.fire({
+            title: 'Error!',
+            width: 600,
+            padding: '3em',
+            color: '#716add',
+            icon: 'error',
+            timer: 1000,
           })
         })
     }

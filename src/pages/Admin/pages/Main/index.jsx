@@ -17,6 +17,10 @@ const WorkersCard = ({
   deleteWorker,
   checkReport,
   deleteReport,
+  isLoadingReports,
+  getReports,
+  reports,
+
 }) => {
   if (!worker) return
 
@@ -61,6 +65,9 @@ const WorkersCard = ({
           setIsActive={setIsActiveWorkerReportsModal}
           checkReport={checkReport}
           deleteReport={deleteReport}
+          isLoadingReports={isLoadingReports}
+          getReports={getReports}
+          reports={reports}
         />
       }
     </>
@@ -79,18 +86,22 @@ export const Main = () => {
   const {
     rooms,
     products,
+    reports,
     isLoadingProducts,
     isLoadingPostProduct,
     isLoadingRooms,
     isLoadingPostRoom,
+    isLoadingReports,
     actions: {
       postRoom,
       deleteRoom,
       postProduct,
       editProduct,
       deleteProduct,
+      getReports,
     },
   } = Admin.Hook.WorkerOffice.use()
+
   const navigate = useNavigate()
   const goToSignUp = () => navigate('/admin/auth/registerworker')
 
@@ -128,6 +139,7 @@ export const Main = () => {
   }
   const [isActiveRoomModal, setIsActiveRoomModal] = React.useState(false)
   const [isActiveProductModal, setIsActiveProductModal] = React.useState(false)
+
   if (!adminId) return <NoAccess isAdmin={true} />
 
   if (!workers) return <Loader />
@@ -156,6 +168,9 @@ export const Main = () => {
                   deleteWorker={deleteWorker}
                   checkReport={checkReport}
                   deleteReport={deleteReport}
+                  getReports={getReports}
+                  isLoadingReports={isLoadingReports}
+                  reports={reports}
                 />
               ))
             }

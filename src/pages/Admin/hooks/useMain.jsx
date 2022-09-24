@@ -51,17 +51,14 @@ const useMain = () => {
     request
       .then(res => {
         console.log(res)
-        getReports(worker)
+        getReports(worker.key)
       })
   }
 
   const deleteReport = (worker, orderId, getReports) => {
     const request = Admin.API.deleteReport(worker.key, orderId)
     request
-      .then(res => {
-        console.log(res)
-        getReports(worker)
-      })
+      .then(() => getReports(worker.key))
   }
 
   React.useEffect(() => {

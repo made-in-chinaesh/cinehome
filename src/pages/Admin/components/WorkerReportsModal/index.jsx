@@ -107,28 +107,12 @@ export const WorkerReportsModal = ({
   worker,
   checkReport,
   deleteReport,
+  getReports,
+  isLoadingReports,
+  reports,
 }) => {
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [reports, setReports] = React.useState(null)
-
-  const getReports = (worker) => {
-    const request = Admin.API.getReports(worker.key)
-    setIsLoading(true)
-    request
-      .then(res => {
-        const data = parseJSON(res.data)
-        if (!data) return
-        const filteredData = data.filter(item => !item.isChecked)
-        if (!filteredData) return
-
-        setReports(filteredData)
-      })
-      .finally(() => setIsLoading(false))
-  }
-
-
   React.useEffect(() => {
-    getReports(worker)
+    getReports(worker.key)
   }, [])
 
 
@@ -141,7 +125,7 @@ export const WorkerReportsModal = ({
           worker={worker}
         />
         {
-          isLoading ? <Loader
+          isLoadingReports ? <Loader
             isFullPage={true}
             isWhite={false}
           /> :

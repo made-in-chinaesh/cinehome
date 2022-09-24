@@ -16,14 +16,6 @@ const useRegisterWorker = () => {
 
         return data
       })
-      .catch(() => {
-        Swal.fire({
-          title: 'Custom width, padding, color, background.',
-          width: 600,
-          padding: '3em',
-          color: '#716add',
-        })
-      })
       .finally(() => setIsLoading(false))
   }
 
