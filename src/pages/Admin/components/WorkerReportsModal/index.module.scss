@@ -70,7 +70,6 @@
           display: flex;
           align-items: center !important;
           justify-content: space-between;
-          // border: 1px solid gainsboro;
           border-radius: 10px;
           padding: 1rem;
           box-shadow: 0 0 20px rgb(0 0 0 / 10%);
@@ -85,9 +84,12 @@
           flex-direction: row;
         }
         .ordersContainer {
+          margin: 10px 0;
           padding: 15px;
           height: 300px;
           overflow: auto;
+          border-top: 1px solid gainsboro;
+          border-bottom: 1px solid gainsboro;
         }
       }
       

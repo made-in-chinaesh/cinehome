@@ -88,7 +88,9 @@ const ReportsList = ({
                   product={product}
                   isWorker={false}
                 >
-                  <p>Выбранное кол-во: {product.count}</p>
+                  <p style={{
+                    marginLeft: 20,
+                  }}>Выбранное кол-во: {product.count}</p>
                 </ProductCards>)
             }
             return

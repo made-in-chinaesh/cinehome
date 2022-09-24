@@ -107,9 +107,22 @@ export const Main = () => {
       if (result.isConfirmed) deleteRoom(roomId)
     })
   }
-  const signOut = () => {
-    sessionStorage.removeItem('admin')
-    navigate('admin/auth/signin')
+
+  const logout = () => {
+    Swal.fire({
+      title: 'Вы действительно хотите выйти?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Отменить',
+      confirmButtonText: 'Выйти',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        sessionStorage.removeItem('admin')
+        navigate('/admin/auth/signin')
+      }
+    })
   }
   const [isActiveRoomModal, setIsActiveRoomModal] = React.useState(false)
   const [isActiveProductModal, setIsActiveProductModal] = React.useState(false)
@@ -127,7 +140,7 @@ export const Main = () => {
             <li><a href="#products">Продукты</a></li>
           </ul>
 
-          <AdminBtn signOut={signOut} isDelete={true}>Выйти из аккаунта</AdminBtn>
+          <button onClick={logout}>Выйти</button>
         </nav>
         <div className={cls.container}>
 

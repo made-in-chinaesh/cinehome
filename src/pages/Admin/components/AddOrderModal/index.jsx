@@ -173,7 +173,7 @@ export const AddOrderModal = ({
                     setSelectedRoom(key) :
                     Swal.fire({
                       position: 'center',
-                      title: 'Эта комната уже забронорована',
+                      title: 'Эта комната уже забронирована!',
                       icon: 'error',
                       timer: 1000,
                     })
