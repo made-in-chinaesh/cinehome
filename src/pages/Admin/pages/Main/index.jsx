@@ -87,6 +87,8 @@ export const Main = () => {
       postRoom,
       deleteRoom,
       postProduct,
+      editProduct,
+      deleteProduct,
     },
   } = Admin.Hook.WorkerOffice.use()
   const navigate = useNavigate()
@@ -96,13 +98,13 @@ export const Main = () => {
 
   const onDelete = (roomId) => {
     Swal.fire({
-      title: 'Вы действительно хотите удалить?',
+      title: 'Вы действительно хотите уволить?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
       cancelButtonText: 'Отменить',
-      confirmButtonText: 'Удалить',
+      confirmButtonText: 'Уволить',
     }).then((result) => {
       if (result.isConfirmed) deleteRoom(roomId)
     })
@@ -184,7 +186,12 @@ export const Main = () => {
               <div className={cls.productsContainer}>
                 {
                   products?.map(product => (
-                    <ProductCards key={product.key} product={product}/>
+                    <ProductCards
+                      key={product.key}
+                      product={product}
+                      editProduct={editProduct}
+                      deleteProduct={deleteProduct}
+                    />
                   ))
                 }
               </div>
