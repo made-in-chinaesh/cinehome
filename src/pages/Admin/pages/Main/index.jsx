@@ -105,7 +105,7 @@ export const Main = () => {
   const navigate = useNavigate()
   const goToSignUp = () => navigate('/admin/auth/registerworker')
 
-  const adminId = sessionStorage.getItem('admin')
+  const adminId = sessionStorage.getItem('adminLocalId')
 
   const onDelete = (roomId) => {
     Swal.fire({
@@ -142,8 +142,6 @@ export const Main = () => {
 
   if (!adminId) return <NoAccess isAdmin={true} />
 
-  if (!workers) return <Loader />
-
   return (
     <>
       <div className={cls.root}>
@@ -161,18 +159,19 @@ export const Main = () => {
           <div id="workers" className={cls.header}><h1>Работники</h1> <AdminBtn onClick={goToSignUp}> + Добавить работника</AdminBtn></div>
           <div className={cls.workersContainer}>
             {
-              workers.map(worker => (
-                <WorkersCard
-                  key={worker.key}
-                  worker={worker}
-                  deleteWorker={deleteWorker}
-                  checkReport={checkReport}
-                  deleteReport={deleteReport}
-                  getReports={getReports}
-                  isLoadingReports={isLoadingReports}
-                  reports={reports}
-                />
-              ))
+              !workers?.length ? <h1>Список работников пуст</h1> :
+                workers?.map(worker => (
+                  <WorkersCard
+                    key={worker.key}
+                    worker={worker}
+                    deleteWorker={deleteWorker}
+                    checkReport={checkReport}
+                    deleteReport={deleteReport}
+                    getReports={getReports}
+                    isLoadingReports={isLoadingReports}
+                    reports={reports}
+                  />
+                ))
             }
           </div>
 

@@ -1,16 +1,15 @@
 import axios from 'axios'
 
 export const firebaseConfig = {
-  apiKey: 'AIzaSyBByCFkcjGVer43NcymHaKbOsxmk8T88IQ',
-  authDomain: 'auth-cinema.firebaseapp.com',
-  databaseURL: 'https://auth-cinema-default-rtdb.asia-southeast1.firebasedatabase.app',
-  projectId: 'auth-cinema',
-  storageBucket: 'auth-cinema.appspot.com',
-  messagingSenderId: '753067574491',
-  appId: '1:753067574491:web:56d8af69ebf6cf5a0a78fe',
-  measurementId: 'G-JGY3STF1KJ',
+  apiKey: 'AIzaSyCCVmJP1m8C9Cp8kvdi1DM0Z3s8YIzkLpo',
+  authDomain: 'cinehome-bb324.firebaseapp.com',
+  databaseURL: 'https://cinehome-bb324-default-rtdb.asia-southeast1.firebasedatabase.app',
+  projectId: 'cinehome-bb324',
+  storageBucket: 'cinehome-bb324.appspot.com',
+  messagingSenderId: '66210663289',
+  appId: '1:66210663289:web:d9581b1a78c78a3b9bfda8',
+  measurementId: 'G-4190YGZ2WQ',
 }
-
 export const auth = (data, isSignIn) => {
   return axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:${isSignIn ? 'signInWithPassword' : 'signUp'}?key=${firebaseConfig.apiKey}`, data)
 }

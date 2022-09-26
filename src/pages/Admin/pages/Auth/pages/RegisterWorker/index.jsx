@@ -5,8 +5,6 @@ import { Input } from 'components/UI/Input'
 import { useForm } from 'react-hook-form'
 import { Forms } from 'helpers/Forms'
 import { Admin } from 'pages/Admin'
-import { auth } from 'configs'
-import Swal from 'sweetalert2'
 
 export const RegisterWorker = () => {
   const {
@@ -20,7 +18,6 @@ export const RegisterWorker = () => {
     isLoading,
     actions: {
       registerWorker,
-      postWorker,
     },
   } = Admin.Hook.RegisterWorker.use()
 
@@ -37,81 +34,33 @@ export const RegisterWorker = () => {
     reset,
   } = useForm()
 
+  const handleImage = (value) => {
+    imageReader(value[0])
+  }
+
   const onSubmit = (data) => {
-    imageReader(data.photoUrl[0])
-
-    if (image) {
-      const newData = {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        phoneNumber: data.phoneNumber,
-        photoUrl: image,
-      }
-
-      const registerBody = {
-        email: data.email,
-        password: data.password,
-      }
-
-      return registerWorker(registerBody)
-        .then(res => {
-          if (!res) return
-
-          postWorker(res.localId, newData)
-          reset({
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: '',
-            phoneNumber: '',
-            photoUrl: '',
-          })
-        })
-        .catch((error) => {
-          const errorMessage = error.response.data.error.message
-
-          if (errorMessage === 'EMAIL_EXISTS') {
-            const request = auth(registerBody, true)
-
-            return request
-              .then(res => {
-                const localId = res.data.localId
-
-                if (!localId) return
-                const isWorker = workers?.find(({ key }) => key === localId)
-
-                if (isWorker) {
-                  return Swal.fire({
-                    title: 'Этот работник уже нанят',
-                    padding: '3em',
-                    color: '#716add',
-                    icon: 'error',
-                    timer: 1000,
-                  })
-                }
-                postWorker(localId, newData)
-                reset({
-                  firstName: '',
-                  lastName: '',
-                  email: '',
-                  password: '',
-                  phoneNumber: '',
-                  photoUrl: '',
-                })
-              })
-          }
-          return Swal.fire({
-            title: 'Error!',
-            width: 600,
-            padding: '3em',
-            color: '#716add',
-            icon: 'error',
-            timer: 1000,
-          })
-        })
+    const newData = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+      photoUrl: image,
     }
-    return
+
+    const registerBody = {
+      email: data.email,
+      password: data.password,
+    }
+
+    reset({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      phoneNumber: '',
+      photoUrl: '',
+    })
+    return registerWorker(registerBody, newData)
   }
 
   return (
@@ -156,6 +105,7 @@ export const RegisterWorker = () => {
           label="Фотография"
           error={errors.photoUrl && errors.photoUrl.message}
           {...register('photoUrl', Forms.Options.SimpleField)}
+          onChange={(e) => handleImage(e.target.files)}
         />
 
         <Button

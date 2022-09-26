@@ -13,6 +13,9 @@ const useMain = () => {
     request
       .then(res => {
         const data = res.data
+
+        if (!data) return
+
         setAdmin(data)
       })
   }
@@ -24,6 +27,8 @@ const useMain = () => {
       .then(res => {
         const data = parseJSON(res.data)
 
+        if (!data) return
+
         setWorkers(data)
       })
   }
@@ -34,6 +39,9 @@ const useMain = () => {
     request
       .then(res => {
         const data = res.data
+
+        if (!data) return
+
         setWorker(data)
       })
   }

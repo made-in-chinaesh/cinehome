@@ -22,50 +22,44 @@ const useSignIn = () => {
     request
       .then(res => {
         const data = res.data
-        if (data.localId === admin.localId) {
+        if (!data) return
+
+        if (data.localId === admin?.localId) {
           Swal.fire({
-            position: 'top',
+            position: 'center',
             icon: 'success',
             title: 'Добро пожаловать!',
-            showConfirmButton: false,
-            timer: 1500,
+            timer: 1000,
           })
-          sessionStorage.setItem('admin', data.localId)
-          return navigate('/admin')
+          sessionStorage.setItem('adminLocalId', data.localId)
+          return setTimeout(() => navigate('/admin'), 1000)
         }
 
-        const isWorker = workers.find(({ email }) => email === data.email)
+        const isWorker = workers?.find(({ localId }) => localId === data.localId)
 
         if (isWorker) {
           Swal.fire({
-            icon: 'success',
             position: 'center',
-            title: `Приветствую ${isWorker.firstName}`,
-            showConfirmButton: false,
-            timer: 1500,
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown',
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp',
-            },
+            icon: 'success',
+            title: `Приветсвую ${isWorker.firstName}!`,
+            timer: 1000,
           })
-
-          sessionStorage.setItem('workerId', isWorker.key)
-          return setTimeout(() => {
-            navigate(`/admin/worker/${isWorker.key}/`)
-          }, 1500)
+          sessionStorage.setItem('workerId', data.localId)
+          return setTimeout(navigate(`/admin/worker/${data.localId}`), 1000)
         }
 
-        Swal.fire({
+        return Swal.fire({
           icon: 'error',
-          title: 'Вы не являетесь частью админки!',
+          title: 'Ошибка!',
+          text: 'Вы не являетесь частью админки',
+          timer: 1000,
         })
       })
       .catch(() => {
         Swal.fire({
           icon: 'error',
           title: 'Ошибка!',
+          timer: 1000,
         })
       })
       .finally(() => setIsLoading(false))

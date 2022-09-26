@@ -53,9 +53,10 @@ export const AddProductModal = ({
     <div className={cls.root}>
       <VscChromeClose onClick={() => setIsActive(false)} />
       <div className={cls.modalOverlay} onClick={() => setIsActive(false)} />
-      <div
+      <form
         className={cls.container}
         data-aos="fade-up"
+        onSubmit={handleSubmit(onSubmit)}
       >
         <h2>Добавить продукт</h2>
         <label>
@@ -92,7 +93,7 @@ export const AddProductModal = ({
           variant={isLoading ? ButtonVariants.loading : ButtonVariants.blue}
           onClick={handleSubmit(onSubmit)}
         >Добавить</Button>
-      </div>
+      </form>
     </div>
   )
 }

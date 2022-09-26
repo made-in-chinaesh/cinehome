@@ -45,11 +45,15 @@ export const AddRoomModal = ({
     <div className={cls.root}>
       <VscChromeClose onClick={() => setIsActive(false)} />
       <div className={cls.modalOverlay} onClick={() => setIsActive(false)} />
-      <div className={cls.container} data-aos="fade-up">
-        <h2>Add Room</h2>
+      <form
+        className={cls.container}
+        data-aos="fade-up"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <h2>Добавить комнату</h2>
         <Input
           type="file"
-          label="Добавьте фотку"
+          label="Выберите фотку"
           {...register('roomImage', Forms.Options.SimpleField)}
           onChange={(e) => handleImage(e.target.files)}
         />
@@ -58,7 +62,7 @@ export const AddRoomModal = ({
           variant={isLoading ? ButtonVariants.loading : ButtonVariants.blue}
           onClick={handleSubmit(onSubmit)}
         >Добавить</Button>
-      </div>
+      </form>
     </div>
   )
 }

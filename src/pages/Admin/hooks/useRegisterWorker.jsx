@@ -6,19 +6,6 @@ import { Admin } from '..'
 const useRegisterWorker = () => {
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const registerWorker = (body) => {
-    const request = auth(body, false)
-
-    setIsLoading(true)
-    return request
-      .then(res => {
-        const data = res.data
-
-        return data
-      })
-      .finally(() => setIsLoading(false))
-  }
-
   const postWorker = (id, body) => {
     const request = Admin.API.postWorker(id, body)
 
@@ -42,6 +29,45 @@ const useRegisterWorker = () => {
         })
       })
   }
+
+  const registerWorker = (body, registerBody) => {
+    const request = auth(body, false)
+
+    setIsLoading(true)
+    return request
+      .then(res => {
+        const data = res.data
+
+        if (!data) return
+
+        const newRegisterBody = {
+          ...registerBody,
+          localId: data.localId,
+        }
+        postWorker(data.localId, newRegisterBody)
+      })
+      .catch(error => {
+        console.log(error)
+        const errorMessage = error.response.data.error.message
+
+        if (errorMessage === 'EMAIL_EXISTS') {
+          return Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Эта почта уже зарегистрирована',
+            timer: 1000,
+          })
+        }
+        return Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Ошибка!',
+          timer: 1000,
+        })
+      })
+      .finally(() => setIsLoading(false))
+  }
+
 
   return {
     isLoading,
