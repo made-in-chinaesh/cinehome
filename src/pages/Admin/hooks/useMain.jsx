@@ -57,10 +57,7 @@ const useMain = () => {
     const request = Admin.API.checkReport(worker.key, orderId)
 
     request
-      .then(res => {
-        console.log(res)
-        getReports(worker.key)
-      })
+      .then(() => getReports(worker.key))
   }
 
   const deleteReport = (worker, orderId, getReports) => {

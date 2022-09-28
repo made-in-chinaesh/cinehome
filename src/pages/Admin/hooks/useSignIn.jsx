@@ -45,7 +45,7 @@ const useSignIn = () => {
             timer: 1000,
           })
           sessionStorage.setItem('workerId', data.localId)
-          return setTimeout(navigate(`/admin/worker/${data.localId}`), 1000)
+          return setTimeout(navigate(`/admin/worker/${data.localId}/`), 1000)
         }
 
         return Swal.fire({

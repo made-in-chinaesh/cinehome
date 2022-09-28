@@ -57,7 +57,7 @@ const ReportsList = ({
       cancelButtonText: 'Отменить',
       confirmButtonText: 'Удалить',
     }).then((result) => {
-      if (result.isConfirmed) deleteReport(worker, key, getReports)
+      if (result.isConfirmed) return deleteReport(worker, key, getReports)
     })
   }
 
